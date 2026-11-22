@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Build v2 — shot-based edit: 33 shots -> per-scene concat -> scene FX -> xfade -> grade -> mix -> captions."""
+"""Build v3 (Hindi cut) — shot-based edit + karaoke captions, SFX sidechain-ducking,
+stinger impact flash + decaying screen shake, bottom progress line.
+shots -> per-scene concat -> scene FX -> xfade -> grade(shake/flash/track) -> mix(ducked) -> captions."""
 import json, os, subprocess, sys
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
@@ -12,6 +14,7 @@ TIMELINE = json.load(open(os.path.join(ROOT, 'production', 'timeline.json')))
 SHOTS = json.load(open(os.path.join(ROOT, 'production', 'shots.json')))
 TOTAL = TIMELINE['total']
 FADE = 0.45
+STINGER_T = next((t for n_, t in TIMELINE.get('sfx', []) if n_ == 'stinger'), None)
 
 def run(args, desc):
     print(f'» {desc}', flush=True)
@@ -138,38 +141,61 @@ base_dur = sum(s['scene_len'] for s in TIMELINE['scenes']) - (n - 1) * FADE
 
 # ---------- Step 4: grade ----------
 graded = os.path.join(WORK, 'graded.mp4')
-run(['-i', base,
-     '-vf', f'vignette=angle=PI/4.3,noise=alls=6:allf=t+u,fade=t=in:st=0:d=0.5,fade=t=out:st={max(base_dur-1.25,0.5):.2f}:d=1.25,format=yuv420p',
-     '-c:v', 'libx264', '-preset', 'fast', '-crf', '16', graded], 'grade')
+fx_chain_pre = []
+if STINGER_T is not None:
+    ST = STINGER_T
+    fx_chain_pre.append(
+        f"crop=1064:1894:x='(iw-1064)/2 + 10*sin(2*PI*21*t)*exp(-5*max(0,t-{ST:.2f}))*if(between(t,{ST:.2f},{ST+0.5:.2f}),1,0)':"
+        f"y='(ih-1894)/2 + 8*cos(2*PI*17*t)*exp(-5*max(0,t-{ST:.2f}))*if(between(t,{ST:.2f},{ST+0.5:.2f}),1,0)',scale=1080:1920")
+fx_chain_pre.append(f'vignette=angle=PI/4.3,noise=alls=6:allf=t+u,fade=t=in:st=0:d=0.5,fade=t=out:st={max(base_dur-1.25,0.5):.2f}:d=1.25')
+if STINGER_T is not None:
+    fx_chain_pre.append(f"drawbox=x=0:y=0:w=1080:h=1920:color=white@0.55:t=fill:enable='between(t,{STINGER_T:.2f},{STINGER_T+0.07:.2f})'")
+fx_chain_pre.append('drawbox=x=0:y=1904:w=1080:h=6:color=0x660d0d@0.85:t=fill')
+run(['-i', base, '-loop', '1', '-t', f'{base_dur:.3f}', '-i', os.path.join(ROOT, 'assets', 'fx', 'progress_dot.png'),
+     '-filter_complex',
+     f"[0:v]{','.join(fx_chain_pre)}[vg];[vg][1:v]overlay=x='min(1076,max(0,t/{base_dur:.4f}*1080))-32':y=1897:eval=frame,format=yuv420p[v]",
+     '-map', '[v]', '-c:v', 'libx264', '-preset', 'fast', '-crf', '16', graded], 'grade (shake+flash+progress)')
 
-# ---------- Step 5: audio mix ----------
+# ---------- Step 5: audio mix (VO bus ducks amb+SFX via sidechain) ----------
 mix = os.path.join(WORK, 'mix.wav')
 audio_inputs, filter_parts = [], []
 idx = 0
-vo_starts = {}
-for sc in TIMELINE['scenes']:
-    vo_starts.setdefault(sc['vo'], sc['vo_start'])
-for name, path_start in vo_starts.items():
-    audio_inputs += ['-i', os.path.join(ROOT, 'assets', 'audio', name)]
-    delay_ms = int(round(path_start * 1000))
-    filter_parts.append(f'[{idx}:a]aformat=channel_layouts=stereo,adelay={delay_ms}|{delay_ms},volume=1.0[vo{idx}]')
+vo_items = []
+if TIMELINE.get('vo_chunks'):
+    for ch in TIMELINE['vo_chunks']:
+        vo_items.append((os.path.join(ROOT, 'assets', 'audio', 'hi', ch['file']), ch['start']))
+else:  # fallback: per-scene VO (English timeline)
+    vo_starts = {}
+    for sc in TIMELINE['scenes']:
+        vo_starts.setdefault(sc['vo'], sc['vo_start'])
+    for name, path_start in vo_starts.items():
+        vo_items.append((os.path.join(ROOT, 'assets', 'audio', name), path_start))
+vo_labels = ''
+for i, (path, t) in enumerate(vo_items):
+    audio_inputs += ['-i', path]
+    delay_ms = int(round(t * 1000))
+    filter_parts.append(f'[{idx}:a]aformat=channel_layouts=stereo,adelay={delay_ms}|{delay_ms},volume=1.0[vo{i}]')
+    vo_labels += f'[vo{i}]'
     idx += 1
-vo_labels = ''.join(f'[vo{i}]' for i in range(len(vo_starts)))
-amb = [('amb_drone.wav', 0.50), ('amb_wind.wav', 0.30)]
-amb_labels = ''
+NUMVO = len(vo_items)
+filter_parts.append(f'{vo_labels}amix=inputs={NUMVO}:normalize=0:dropout_transition=0,aformat=channel_layouts=stereo[vomix]')
+
+amb = [('amb_drone.wav', 0.38), ('amb_wind.wav', 0.24)]
+other_labels = ''
 for name, vol in amb:
     audio_inputs += ['-i', os.path.join(ROOT, 'assets', 'audio', name)]
     filter_parts.append(f'[{idx}:a]aformat=channel_layouts=stereo,atrim=0:{TOTAL:.2f},asetpts=PTS-STARTPTS,volume={vol}[amb{idx}]')
-    amb_labels += f'[amb{idx}]'
+    other_labels += f'[amb{idx}]'
     idx += 1
+
 STINGER_T = next(t for n_, t in TIMELINE['sfx'] if n_ == 'stinger')
 sfx_events = [e for e in TIMELINE['sfx'] if e[0] not in ('murmur2',)] + [('riser', max(STINGER_T - 1.22, 0.05))]
-SFX_MAP = {'bell': ('sfx_bell.wav', 0.75), 'bell2': ('sfx_bell.wav', 0.55),
-           'heartbeat': ('sfx_heartbeat.wav', 0.80), 'stinger': ('sfx_stinger.wav', 0.90),
-           'rumble': ('sfx_rumble.wav', 0.62), 'tap': ('sfx_tap.wav', 0.60),
-           'subdrop': ('sfx_subdrop.wav', 0.85), 'murmur': ('sfx_murmur.wav', 0.42),
-           'riser': ('sfx_riser.wav', 0.80)}
-sfx_labels = ''
+SFX_MAP = {'bell': ('sfx_bell.wav', 0.62), 'bell2': ('sfx_bell.wav', 0.45),
+           'heartbeat': ('sfx_heartbeat.wav', 0.68), 'stinger': ('sfx_stinger.wav', 0.85),
+           'rumble': ('sfx_rumble.wav', 0.55), 'tap': ('sfx_tap.wav', 0.55),
+           'subdrop': ('sfx_subdrop.wav', 0.72), 'murmur': ('sfx_murmur.wav', 0.36),
+           'riser': ('sfx_riser.wav', 0.72)}
+NSFX = 0
 for name, t in sfx_events:
     if name not in SFX_MAP:
         continue
@@ -177,22 +203,26 @@ for name, t in sfx_events:
     audio_inputs += ['-i', os.path.join(ROOT, 'assets', 'audio', fname)]
     delay_ms = int(round(t * 1000))
     filter_parts.append(f'[{idx}:a]aformat=channel_layouts=stereo,adelay={delay_ms}|{delay_ms},volume={vol}[sfx{idx}]')
-    sfx_labels += f'[sfx{idx}]'
+    other_labels += f'[sfx{idx}]'
     idx += 1
-total_inputs = len(vo_starts) + len(amb) + len([e for e in sfx_events if e[0] in SFX_MAP])
-filter_parts.append(f'{vo_labels}{amb_labels}{sfx_labels}amix=inputs={total_inputs}:normalize=0:dropout_transition=0[premix]')
+    NSFX += 1
+NOTHER = len(amb) + NSFX
+filter_parts.append(f'{other_labels}amix=inputs={NOTHER}:normalize=0:dropout_transition=0,aformat=channel_layouts=stereo[otherpre]')
+# key = VO: amb+SFX ducked automatically whenever narration is present
+filter_parts.append('[otherpre][vomix]sidechaincompress=threshold=0.02:ratio=7:attack=18:release=260:makeup=1.35[otherduck]')
+filter_parts.append('[vomix][otherduck]amix=inputs=2:normalize=0[premix]')
 filter_parts.append(f'[premix]highpass=f=25,afade=t=out:st={max(TOTAL-1.5,0.5):.2f}:d=1.5,loudnorm=I=-14:TP=-1.5:LRA=11:dual_mono=false[mixout]')
 run([*audio_inputs, '-filter_complex', ';'.join(filter_parts),
-     '-map', '[mixout]', '-ar', '48000', '-c:a', 'pcm_s16le', mix], 'audio mix + riser')
+     '-map', '[mixout]', '-ar', '48000', '-c:a', 'pcm_s16le', mix], 'audio mix (sidechain-ducked) + riser')
 
 # ---------- Step 6: final mux + captions ----------
 final = os.path.join(OUT_DIR, 'dancing-plague-1518-true-story-short.mp4')
 run(['-i', graded, '-i', mix,
-     '-filter_complex', f"[0:v]scale=in_range=auto:out_range=limited,subtitles='{CAPTIONS}':fontsdir=/usr/share/fonts/truetype/dejavu,format=yuv420p[v]",
+     '-filter_complex', f"[0:v]scale=in_range=auto:out_range=limited,subtitles='{CAPTIONS}':fontsdir=/home/user/Vxgrm/assets/fonts,format=yuv420p[v]",
      '-map', '[v]', '-map', '1:a',
      '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', '-pix_fmt', 'yuv420p',
      '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709', '-color_range', 'tv',
      '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart',
      '-shortest', final], 'final mux + caption burn')
-print(f'\nFINAL → {final}')
+print(f'\nFINAL (Hindi v3) → {final}')
 print(f'expected duration ≈ {base_dur:.2f}s @30fps, 1080x1920')
