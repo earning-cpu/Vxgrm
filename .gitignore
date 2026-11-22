@@ -1,0 +1,11 @@
+# python / envs
+.venv/
+__pycache__/
+*.pyc
+# intermediates & bulky QA artifacts
+assets/segments/
+assets/work/
+qa/frames/
+# os / editor
+.DS_Store
+Thumbs.db

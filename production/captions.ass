@@ -1,0 +1,51 @@
+[Script Info]
+Title: Dancing Plague 1518 — Viral Captions
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Viral,DejaVu Sans Bold,60,&H00FFFFFF,&H000000FF,&H00000000,&H64000000,-1,0,1,3.6,1.8,2,55,55,560,1
+Style: DateFlash,DejaVu Sans Bold,46,&H004D48E5,&H000000FF,&H00000000,&H64000000,-1,0,1,2.6,1.3,5,30,30,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.06,0:00:02.30,DateFlash,,0,0,0,,{\an5\pos(540,830)\fad(70,50)}STRASBOURG · 14 JULY 1518
+Dialogue: 0,0:00:00.12,0:00:02.85,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}ON {\c&H4D48E5&}JULY 14TH, 1518{\c&HFFFFFF&} —
+Dialogue: 0,0:00:02.85,0:00:06.26,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}A WOMAN BEGAN TO DANCE
+Dialogue: 0,0:00:05.99,0:00:07.54,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}HISTORY CALLS HER
+Dialogue: 0,0:00:07.54,0:00:08.58,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}{\c&H4D48E5&}FRAU TROFFEA{\c&HFFFFFF&}.
+Dialogue: 0,0:00:08.58,0:00:10.65,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}NO MUSIC. NO REASON.
+Dialogue: 0,0:00:10.65,0:00:12.72,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}SHE {\c&H4D48E5&}COULD NOT STOP{\c&HFFFFFF&}.
+Dialogue: 0,0:00:12.57,0:00:15.31,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}SHE DANCED FOR DAYS.
+Dialogue: 0,0:00:15.31,0:00:18.06,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}THEN — {\c&H4D48E5&}THIRTY OTHERS{\c&HFFFFFF&} JOINED.
+Dialogue: 0,0:00:18.06,0:00:19.43,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}THEN {\c&H4D48E5&}400{\c&HFFFFFF&}.
+Dialogue: 0,0:00:19.28,0:00:20.25,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}{\c&H4D48E5&}VACANT EYES{\c&HFFFFFF&}.
+Dialogue: 0,0:00:20.25,0:00:22.67,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}FEET {\c&H4D48E5&}BLED{\c&HFFFFFF&} INTO THEIR SHOES.
+Dialogue: 0,0:00:22.67,0:00:24.61,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}THEY SCREAMED FOR HELP —
+Dialogue: 0,0:00:24.61,0:00:26.06,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}AND KEPT DANCING.
+Dialogue: 0,0:00:25.95,0:00:28.46,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}THE CITY COUNCIL'S CURE?
+Dialogue: 0,0:00:28.46,0:00:29.72,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}{\c&H4D48E5&}MORE DANCING{\c&HFFFFFF&}.
+Dialogue: 0,0:00:29.72,0:00:30.98,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}{\c&H4D48E5&}HIRED MUSICIANS{\c&HFFFFFF&}.
+Dialogue: 0,0:00:30.83,0:00:33.13,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}THE CURE WAS
+Dialogue: 0,0:00:33.13,0:00:34.67,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}THE {\c&H4D48E5&}CATASTROPHE{\c&HFFFFFF&}.
+Dialogue: 0,0:00:34.67,0:00:36.97,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}THE STREETS FILLED.
+Dialogue: 0,0:00:36.82,0:00:38.09,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}CHRONICLES CLAIM
+Dialogue: 0,0:00:38.09,0:00:41.25,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}{\c&H4D48E5&}15 DIED{\c&HFFFFFF&} IN ONE DAY.
+Dialogue: 0,0:00:41.25,0:00:44.41,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}THE TRUE TOLL IS {\c&H4D48E5&}LOST{\c&HFFFFFF&}.
+Dialogue: 0,0:00:44.30,0:00:46.58,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}MARCHED TO A SHRINE —
+Dialogue: 0,0:00:46.58,0:00:48.87,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}{\c&H4D48E5&}RED SHOES{\c&HFFFFFF&}, HOLY WATER,
+Dialogue: 0,0:00:48.87,0:00:50.01,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}{\c&H4D48E5&}SAINT VITUS{\c&HFFFFFF&}.
+Dialogue: 0,0:00:49.86,0:00:52.26,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}THEY BEGGED IN LATIN —
+Dialogue: 0,0:00:52.26,0:00:54.07,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}AND BY SEPTEMBER…
+Dialogue: 0,0:00:54.07,0:00:55.87,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}IT SIMPLY — {\c&H4D48E5&}STOPPED{\c&HFFFFFF&}.
+Dialogue: 0,0:00:55.84,0:00:57.15,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}{\c&H4D48E5&}STILL UNSOLVED{\c&HFFFFFF&}.
+Dialogue: 0,0:00:57.15,0:00:59.77,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}{\c&H4D48E5&}POISONED RYE{\c&HFFFFFF&}? MASS HYSTERIA?
+Dialogue: 0,0:00:59.77,0:01:01.74,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}OR SOMETHING THAT
+Dialogue: 0,0:01:01.74,0:01:03.70,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}WANTED THEM DANCING.
+Dialogue: 0,0:01:03.70,0:01:06.91,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}IF THE PLAGUE NEVER ENDED…
+Dialogue: 0,0:01:06.91,0:01:09.48,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}SOMEONE IS {\c&H4D48E5&}STILL DANCING{\c&HFFFFFF&}.
+Dialogue: 0,0:01:09.48,0:01:12.05,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(70,50)}{\c&H4D48E5&}FOLLOW{\c&HFFFFFF&} FOR MORE\NTRUE NIGHTMARES

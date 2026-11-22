@@ -1,0 +1,173 @@
+{
+ "total": 73.32,
+ "pre_fade_total": 77.82,
+ "fade": 0.45,
+ "scenes": [
+  {
+   "id": "S01",
+   "image": "s01_hook.jpg",
+   "vo": "vo_01_hook.mp3",
+   "vo_start": 0.12,
+   "vo_dur": 6.14,
+   "vo_offset": 0.0,
+   "scene_start": 0.0,
+   "scene_len": 6.44,
+   "actual_start": 0.0,
+   "kb": "zoomin"
+  },
+  {
+   "id": "S02",
+   "image": "s02_troffea.jpg",
+   "vo": "vo_02_context.mp3",
+   "vo_start": 5.99,
+   "vo_dur": 6.73,
+   "vo_offset": 0.0,
+   "scene_start": 5.99,
+   "scene_len": 7.03,
+   "actual_start": 5.99,
+   "kb": "panup"
+  },
+  {
+   "id": "S03",
+   "image": "s03_fourhundred.jpg",
+   "vo": "vo_03_build1.mp3",
+   "vo_start": 12.57,
+   "vo_dur": 6.86,
+   "vo_offset": 0.0,
+   "scene_start": 12.57,
+   "scene_len": 7.16,
+   "actual_start": 12.57,
+   "kb": "zoomout"
+  },
+  {
+   "id": "S04",
+   "image": "s04_feet.jpg",
+   "vo": "vo_04_build2.mp3",
+   "vo_start": 19.28,
+   "vo_dur": 6.78,
+   "vo_offset": 0.0,
+   "scene_start": 19.28,
+   "scene_len": 7.12,
+   "actual_start": 19.28,
+   "kb": "zoomin"
+  },
+  {
+   "id": "S05",
+   "image": "s05_council.jpg",
+   "vo": "vo_05_build3.mp3",
+   "vo_start": 25.95,
+   "vo_dur": 5.03,
+   "vo_offset": 0.0,
+   "scene_start": 25.95,
+   "scene_len": 5.33,
+   "actual_start": 25.95,
+   "kb": "panright"
+  },
+  {
+   "id": "S06",
+   "image": "s06_musicians.jpg",
+   "vo": "vo_06_breadcrumb.mp3",
+   "vo_start": 30.83,
+   "vo_dur": 6.14,
+   "vo_offset": 0.0,
+   "scene_start": 30.83,
+   "scene_len": 6.44,
+   "actual_start": 30.83,
+   "kb": "zoomout"
+  },
+  {
+   "id": "S07",
+   "image": "s07_collapse.jpg",
+   "vo": "vo_07_toll.mp3",
+   "vo_start": 36.82,
+   "vo_dur": 7.59,
+   "vo_offset": 0.0,
+   "scene_start": 36.82,
+   "scene_len": 7.93,
+   "actual_start": 36.82,
+   "kb": "zoomin"
+  },
+  {
+   "id": "S08",
+   "image": "s08_shrine.jpg",
+   "vo": "vo_08_shrine.mp3",
+   "vo_start": 44.3,
+   "vo_dur": 5.71,
+   "vo_offset": 0.0,
+   "scene_start": 44.3,
+   "scene_len": 6.01,
+   "actual_start": 44.3,
+   "kb": "panleft"
+  },
+  {
+   "id": "S09",
+   "image": "s09_chapel.jpg",
+   "vo": "vo_09_september.mp3",
+   "vo_start": 49.86,
+   "vo_dur": 6.01,
+   "vo_offset": 0.0,
+   "scene_start": 49.86,
+   "scene_len": 6.43,
+   "actual_start": 49.86,
+   "kb": "zoomin"
+  },
+  {
+   "id": "S10",
+   "image": "s10_rye.jpg",
+   "vo": "vo_10_loop.mp3",
+   "vo_start": 55.84,
+   "vo_dur": 16.21,
+   "vo_offset": 0.0,
+   "scene_start": 55.84,
+   "scene_len": 8.0818,
+   "actual_start": 55.84,
+   "kb": "zoomout"
+  },
+  {
+   "id": "S11",
+   "image": "s11_still.jpg",
+   "vo": "vo_10_loop.mp3",
+   "vo_start": 55.84,
+   "vo_dur": 16.21,
+   "vo_offset": 7.8619,
+   "scene_start": 63.4718,
+   "scene_len": 9.8482,
+   "actual_start": 63.4718,
+   "kb": "zoomin"
+  }
+ ],
+ "sfx": [
+  [
+   "bell",
+   1.85
+  ],
+  [
+   "murmur",
+   12.77
+  ],
+  [
+   "heartbeat",
+   19.630000000000003
+  ],
+  [
+   "stinger",
+   30.88
+  ],
+  [
+   "rumble",
+   36.92
+  ],
+  [
+   "tap",
+   55.01
+  ],
+  [
+   "bell2",
+   55.16
+  ],
+  [
+   "subdrop",
+   64.5718
+  ]
+ ]
+}
