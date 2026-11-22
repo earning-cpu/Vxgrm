@@ -9,3 +9,5 @@ qa/frames/
 # os / editor
 .DS_Store
 Thumbs.db
+assets/segments2/
+assets/fx_tmp/

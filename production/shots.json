@@ -1,0 +1,554 @@
+{
+ "shots": [
+  {
+   "idx": 0,
+   "scene": "S01",
+   "image": "s01_hook.jpg",
+   "crop": null,
+   "move": "ease_in",
+   "peak": 1.16,
+   "dur": 2.3,
+   "frames": 69,
+   "wobble": 15,
+   "abs_start": 0.0
+  },
+  {
+   "idx": 1,
+   "scene": "S01",
+   "image": "s01_hook.jpg",
+   "crop": [
+    380,
+    700,
+    860,
+    1529
+   ],
+   "move": "punch",
+   "peak": 1.22,
+   "dur": 2.2,
+   "frames": 66,
+   "wobble": 20,
+   "abs_start": 2.3
+  },
+  {
+   "idx": 2,
+   "scene": "S01",
+   "image": "s01_hook.jpg",
+   "crop": [
+    460,
+    240,
+    700,
+    1244
+   ],
+   "move": "ease_in",
+   "peak": 1.24,
+   "dur": 1.94,
+   "frames": 58,
+   "wobble": 15,
+   "abs_start": 4.5
+  },
+  {
+   "idx": 3,
+   "scene": "S02",
+   "image": "s02_troffea.jpg",
+   "crop": [
+    210,
+    80,
+    1200,
+    2133
+   ],
+   "move": "ease_in",
+   "peak": 1.18,
+   "dur": 2.4,
+   "frames": 72,
+   "wobble": 15,
+   "abs_start": 5.99
+  },
+  {
+   "idx": 4,
+   "scene": "S02",
+   "image": "s02_troffea.jpg",
+   "crop": [
+    430,
+    60,
+    760,
+    1351
+   ],
+   "move": "punch",
+   "peak": 1.2,
+   "dur": 2.42,
+   "frames": 73,
+   "wobble": 19,
+   "abs_start": 8.39
+  },
+  {
+   "idx": 5,
+   "scene": "S02",
+   "image": "s02_troffea.jpg",
+   "crop": [
+    120,
+    1500,
+    640,
+    1138
+   ],
+   "move": "ease_in",
+   "peak": 1.22,
+   "dur": 2.21,
+   "frames": 66,
+   "wobble": 15,
+   "abs_start": 10.81
+  },
+  {
+   "idx": 6,
+   "scene": "S03",
+   "image": "s03_fourhundred.jpg",
+   "crop": null,
+   "move": "ease_out",
+   "peak": 1.17,
+   "dur": 2.66,
+   "frames": 80,
+   "wobble": 15,
+   "abs_start": 12.57
+  },
+  {
+   "idx": 7,
+   "scene": "S03",
+   "image": "s03_fourhundred.jpg",
+   "crop": [
+    300,
+    900,
+    1000,
+    1778
+   ],
+   "move": "ease_in",
+   "peak": 1.2,
+   "dur": 2.42,
+   "frames": 73,
+   "wobble": 16,
+   "abs_start": 15.23
+  },
+  {
+   "idx": 8,
+   "scene": "S03",
+   "image": "s03_fourhundred.jpg",
+   "crop": [
+    760,
+    60,
+    620,
+    1102
+   ],
+   "move": "ease_in",
+   "peak": 1.22,
+   "dur": 2.08,
+   "frames": 62,
+   "wobble": 15,
+   "abs_start": 17.65
+  },
+  {
+   "idx": 9,
+   "scene": "S04",
+   "image": "s04_feet.jpg",
+   "crop": null,
+   "move": "ease_in",
+   "peak": 1.17,
+   "dur": 2.52,
+   "frames": 76,
+   "wobble": 15,
+   "abs_start": 19.28
+  },
+  {
+   "idx": 10,
+   "scene": "S04",
+   "image": "s04_feet.jpg",
+   "crop": [
+    250,
+    1400,
+    700,
+    1244
+   ],
+   "move": "punch",
+   "peak": 1.22,
+   "dur": 2.3,
+   "frames": 69,
+   "wobble": 20,
+   "abs_start": 21.8
+  },
+  {
+   "idx": 11,
+   "scene": "S04",
+   "image": "s04_feet.jpg",
+   "crop": [
+    620,
+    1200,
+    900,
+    1600
+   ],
+   "move": "ease_in",
+   "peak": 1.18,
+   "dur": 2.3,
+   "frames": 69,
+   "wobble": 15,
+   "abs_start": 24.1
+  },
+  {
+   "idx": 12,
+   "scene": "S05",
+   "image": "s05_council.jpg",
+   "crop": null,
+   "move": "ease_in",
+   "peak": 1.16,
+   "dur": 1.9,
+   "frames": 57,
+   "wobble": 15,
+   "abs_start": 25.95
+  },
+  {
+   "idx": 13,
+   "scene": "S05",
+   "image": "s05_council.jpg",
+   "crop": [
+    330,
+    900,
+    900,
+    1600
+   ],
+   "move": "ease_in",
+   "peak": 1.2,
+   "dur": 1.8,
+   "frames": 54,
+   "wobble": 15,
+   "abs_start": 27.85
+  },
+  {
+   "idx": 14,
+   "scene": "S05",
+   "image": "s05_council.jpg",
+   "crop": [
+    250,
+    1100,
+    1000,
+    1778
+   ],
+   "move": "punch",
+   "peak": 1.2,
+   "dur": 1.63,
+   "frames": 49,
+   "wobble": 18,
+   "abs_start": 29.65
+  },
+  {
+   "idx": 15,
+   "scene": "S06",
+   "image": "s06_musicians.jpg",
+   "crop": [
+    280,
+    900,
+    1050,
+    1867
+   ],
+   "move": "ease_in",
+   "peak": 1.18,
+   "dur": 2.3,
+   "frames": 69,
+   "wobble": 16,
+   "abs_start": 30.83
+  },
+  {
+   "idx": 16,
+   "scene": "S06",
+   "image": "s06_musicians.jpg",
+   "crop": [
+    550,
+    1280,
+    900,
+    1600
+   ],
+   "move": "punch",
+   "peak": 1.22,
+   "dur": 2.3,
+   "frames": 69,
+   "wobble": 20,
+   "abs_start": 33.13
+  },
+  {
+   "idx": 17,
+   "scene": "S06",
+   "image": "s06_musicians.jpg",
+   "crop": [
+    850,
+    1000,
+    700,
+    1244
+   ],
+   "move": "ease_in",
+   "peak": 1.2,
+   "dur": 1.84,
+   "frames": 55,
+   "wobble": 15,
+   "abs_start": 35.43
+  },
+  {
+   "idx": 18,
+   "scene": "S07",
+   "image": "s07_collapse.jpg",
+   "crop": null,
+   "move": "ease_out",
+   "peak": 1.16,
+   "dur": 3.06,
+   "frames": 92,
+   "wobble": 15,
+   "abs_start": 36.82
+  },
+  {
+   "idx": 19,
+   "scene": "S07",
+   "image": "s07_collapse.jpg",
+   "crop": [
+    600,
+    800,
+    950,
+    1689
+   ],
+   "move": "ease_in",
+   "peak": 1.2,
+   "dur": 2.35,
+   "frames": 70,
+   "wobble": 15,
+   "abs_start": 39.88
+  },
+  {
+   "idx": 20,
+   "scene": "S07",
+   "image": "s07_collapse.jpg",
+   "crop": [
+    80,
+    1100,
+    900,
+    1600
+   ],
+   "move": "ease_in",
+   "peak": 1.18,
+   "dur": 2.52,
+   "frames": 76,
+   "wobble": 15,
+   "abs_start": 42.23
+  },
+  {
+   "idx": 21,
+   "scene": "S08",
+   "image": "s08_shrine.jpg",
+   "crop": null,
+   "move": "ease_in",
+   "peak": 1.15,
+   "dur": 2.1,
+   "frames": 63,
+   "wobble": 15,
+   "abs_start": 44.3
+  },
+  {
+   "idx": 22,
+   "scene": "S08",
+   "image": "s08_shrine.jpg",
+   "crop": [
+    150,
+    1450,
+    800,
+    1422
+   ],
+   "move": "ease_in",
+   "peak": 1.2,
+   "dur": 1.9,
+   "frames": 57,
+   "wobble": 15,
+   "abs_start": 46.4
+  },
+  {
+   "idx": 23,
+   "scene": "S08",
+   "image": "s08_shrine.jpg",
+   "crop": [
+    660,
+    20,
+    660,
+    1173
+   ],
+   "move": "ease_in",
+   "peak": 1.22,
+   "dur": 2.01,
+   "frames": 60,
+   "wobble": 15,
+   "abs_start": 48.3
+  },
+  {
+   "idx": 24,
+   "scene": "S09",
+   "image": "s09_chapel.jpg",
+   "crop": null,
+   "move": "ease_out",
+   "peak": 1.16,
+   "dur": 2.36,
+   "frames": 71,
+   "wobble": 15,
+   "abs_start": 49.86
+  },
+  {
+   "idx": 25,
+   "scene": "S09",
+   "image": "s09_chapel.jpg",
+   "crop": [
+    60,
+    1458,
+    800,
+    1422
+   ],
+   "move": "punch",
+   "peak": 1.2,
+   "dur": 2.06,
+   "frames": 62,
+   "wobble": 19,
+   "abs_start": 52.22
+  },
+  {
+   "idx": 26,
+   "scene": "S09",
+   "image": "s09_chapel.jpg",
+   "crop": [
+    330,
+    380,
+    500,
+    889
+   ],
+   "move": "punch",
+   "peak": 1.18,
+   "dur": 2.01,
+   "frames": 60,
+   "wobble": 18,
+   "abs_start": 54.28
+  },
+  {
+   "idx": 27,
+   "scene": "S10",
+   "image": "s10_rye.jpg",
+   "crop": null,
+   "move": "ease_out",
+   "peak": 1.16,
+   "dur": 3.3007,
+   "frames": 99,
+   "wobble": 15,
+   "abs_start": 55.84
+  },
+  {
+   "idx": 28,
+   "scene": "S10",
+   "image": "s10_rye.jpg",
+   "crop": [
+    100,
+    420,
+    760,
+    1351
+   ],
+   "move": "punch",
+   "peak": 1.22,
+   "dur": 2.3605,
+   "frames": 71,
+   "wobble": 20,
+   "abs_start": 59.1407
+  },
+  {
+   "idx": 29,
+   "scene": "S10",
+   "image": "s10_rye.jpg",
+   "crop": [
+    210,
+    747,
+    1200,
+    2133
+   ],
+   "move": "ease_in",
+   "peak": 1.18,
+   "dur": 2.4205,
+   "frames": 73,
+   "wobble": 15,
+   "abs_start": 61.5013
+  },
+  {
+   "idx": 30,
+   "scene": "S11",
+   "image": "s11_still.jpg",
+   "crop": null,
+   "move": "ease_in",
+   "peak": 1.18,
+   "dur": 3.5993,
+   "frames": 108,
+   "wobble": 15,
+   "abs_start": 63.4718
+  },
+  {
+   "idx": 31,
+   "scene": "S11",
+   "image": "s11_still.jpg",
+   "crop": [
+    350,
+    600,
+    700,
+    1244
+   ],
+   "move": "ease_in",
+   "peak": 1.22,
+   "dur": 3.0994,
+   "frames": 93,
+   "wobble": 16,
+   "abs_start": 67.0711
+  },
+  {
+   "idx": 32,
+   "scene": "S11",
+   "image": "s11_still.jpg",
+   "crop": [
+    400,
+    1600,
+    480,
+    853
+   ],
+   "move": "punch",
+   "peak": 1.24,
+   "dur": 3.1494,
+   "frames": 94,
+   "wobble": 20,
+   "abs_start": 70.1706
+  }
+ ],
+ "scene_fx": {
+  "S01": [
+   "rain",
+   "fog"
+  ],
+  "S02": [],
+  "S03": [
+   "fog"
+  ],
+  "S04": [],
+  "S05": [
+   "flicker"
+  ],
+  "S06": [
+   "embers",
+   "rgbashift"
+  ],
+  "S07": [
+   "flicker"
+  ],
+  "S08": [
+   "fog"
+  ],
+  "S09": [
+   "flicker"
+  ],
+  "S10": [
+   "lightning"
+  ],
+  "S11": [
+   "rain",
+   "fog"
+  ]
+ }
+}

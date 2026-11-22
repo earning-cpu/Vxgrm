@@ -1,6 +1,6 @@
 # Upload pack — "The Dancing Plague of 1518" Short
 
-**File:** `output/dancing-plague-1518-true-story-short.mp4` · 73 s · 1080×1920 · 30 fps
+**File:** `output/dancing-plague-1518-true-story-short.mp4` · 73 s · 1080×1920 · 30 fps · ~39 MB (v2)
 **Suggested publish settings:** Shorts tab, audience: not made for kids (horror), category: Entertainment/Education
 
 ## Title options (pick one)
@@ -25,7 +25,10 @@ dancing plague, dancing plague of 1518, strasbourg, true horror story, real horr
 "Cause: mass psychogenic illness? Poisoned rye? Or something older? Sources + fact-check in the description. 🕯️"
 
 ## Cover / thumbnail frame
-Frame at t≈1.0–2.0 (Frau Troffea silhouette, wet cobblestones, red date-flash) — high contrast, single focal object, works at Shorts-feed size.
+Frame at t≈0.8–1.2 (Frau Troffea silhouette, rain-streaked street, red date-flash `STRASBOURG · 14 JULY 1518`) — high contrast, single focal object, works at Shorts-feed size. Alt: t≈56.9 (S10 lightning burst, "STILL UNSOLVED.") for maximum menace.
+
+## Edit log (v2, 2026-11-22)
+Shot-based cut rhythm (~2.2 s avg, hard cuts on VO beat) · 3-shot wide→detail→punch per scene (33 shots) · screen-blend rain/fog/embers · S05/S07/S09 lantern flicker · S10 lightning bursts · riser→stinger at 30.88 s · caption pop-in bounce + DateFlash glitch · candle-lift on S05/S07/S09. Frame-exact QC: 2 199/2 199 frames decoded, 0 black runs, 36/36 captions, −14.6 LUFS.
 
 ## Best practices applied (see research/viral-horror-shorts-playbook.md)
-Hook in <2 s · 4-beat spine (Hook→Context→Escalate→Loop) · pattern break every ~5 s · 6-word caption chunks, lower-third, red keyword highlights · no spoken outro · loop-friendly final frame · captions readable on mute · 73 s ≤ 3 min Shorts limit.
+Hook in <2 s · 4-beat spine (Hook→Context→Escalate→Loop) · pattern break every ~5 s · ~2.2 s cut cadence with punch-in accents · 6-word caption chunks, lower-third, red keyword highlights · no spoken outro · loop-friendly final frame · captions readable on mute · 73 s ≤ 3 min Shorts limit.

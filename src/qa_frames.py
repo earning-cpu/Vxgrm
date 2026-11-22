@@ -72,6 +72,22 @@ for kind, a, b in runs:
     edge_ok = (a < 20 and kind == 'BLACK') or (b > N - 40 and kind == 'BLACK')
     bug('black-or-white-frame-run', f'{kind} run frames {a}-{b} ({(b-a+1)/30:.2f}s) edge_fade={edge_ok}', f'{a}-{b}')
 
+_tl = json.load(open(os.path.join(ROOT, 'production', 'timeline.json')))
+cut_frames = set()
+# hard cuts from the shot table (absolute video time)
+_sh = json.load(open(os.path.join(ROOT, 'production', 'shots.json')))
+for s in _sh['shots']:
+    f0 = int(round(s['abs_start'] * 30))
+    for f in range(f0 - 2, f0 + 3):
+        cut_frames.add(f)
+# intentional lightning gamma bursts in S10 (see build_video2.py: local t 1.05-1.12 and 2.66-2.73)
+_s10 = next(sc for sc in _tl['scenes'] if sc['id'] == 'S10')
+for lt in (1.05, 1.12, 2.66, 2.73):
+    f0 = int(round((_s10['actual_start'] + lt) * 30))
+    for f in range(f0 - 1, f0 + 2):
+        cut_frames.add(f)
+print(f'whitelisted cut/flash frames (±2/±1): {len(cut_frames)}')
+
 for i, m in enumerate(metrics):
     _, _, mean, std, mn, mx, diff, dead = m
     if mean is None:
@@ -79,7 +95,7 @@ for i, m in enumerate(metrics):
         continue
     if dead != '-' and mean >= 20.0:  # near-black frames are intentional fade edges
         bug('dead-channel', f'channel(s) {dead} flat (std<0.5)', str(i))
-    if i > 0 and diff > SPIKE_T:
+    if i > 0 and diff > SPIKE_T and i not in cut_frames:
         bug('luma-spike', f'|frame diff| {diff:.2f} > {SPIKE_T}', str(i))
 
 frozen_start = None
@@ -120,7 +136,8 @@ for si, (t0, t1, style, text) in enumerate(events):
     f0, f1 = int(t0 * 30), min(N - 1, int(t1 * 30))
     found = 0
     clip_hits = 0
-    for f in range(f0, f1 + 1, max(1, (f1 - f0) // 4)):
+    lo = f0 + int(0.30 * max(1, f1 - f0))  # skip pop-in ramp
+    for f in range(lo, f1 + 1, max(1, (f1 - lo) // 3)):
         im = load(f)
         b = im[band, :, :]
         bright = ((b.max(axis=2) > 190)).sum()

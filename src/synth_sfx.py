@@ -58,7 +58,7 @@ def exp_decay(n, tau_s):
     return np.exp(-np.arange(n) / (tau_s * SR))
 
 # ---------- 1. DRONE (full-duration sub bed, 55Hz beating pair) ----------
-T_TOTAL = 80.0
+T_TOTAL = 74.0  # video is 73.32s; keep ambience slightly shorter than v1 (was 80)
 n = int(T_TOTAL * SR)
 t = np.arange(n) / SR
 drone = (0.55 * np.sin(2 * np.pi * 55.0 * t)
@@ -141,6 +141,15 @@ phase = 2 * np.pi * np.cumsum(freq) / SR
 sub = np.sin(phase) * exp_decay(nd, 2.4)
 sub *= t_env(nd, 0.01, 0.5)
 save('sfx_subdrop.wav', norm(stereo(sub), 0.85))
+
+# ---------- 10. RISE (1.25s pre-stinger swell: 42->98Hz + noise crescendo) ----------
+dur = 1.25; nr = int(dur * SR); tr = np.arange(nr) / SR
+freq = 42.0 + 56.0 * (tr / dur)
+phase = 2 * np.pi * np.cumsum(freq) / SR
+rise = np.sin(phase) * (tr / dur) ** 2.2
+rise += 0.22 * butter_lp_fast(rng.standard_normal(nr), 900, 2) * (tr / dur) ** 3.0
+rise *= t_env(nr, 0.05, 0.03)
+save('sfx_riser.wav', norm(stereo(rise), 0.82))
 
 # ---------- 9. RED SHOE TAP (single hard heel tap under "stopped", 0.8s) ----------
 dur = 0.8; nt = int(dur * SR); tt = np.arange(nt) / SR

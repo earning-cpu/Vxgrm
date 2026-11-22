@@ -154,8 +154,11 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 with open(os.path.join(ROOT, 'production', 'captions.ass'), 'w') as f:
     f.write(ASS_HEAD)
     for start, end, text, style in events:
-        pos = '\\an2\\pos(540,1352)' if style == 'Viral' else '\\an5\\pos(540,830)'
-        f.write(f'Dialogue: 0,{ass_time(start)},{ass_time(end)},{style},,0,0,0,,{{{pos}\\fad(70,50)}}{text}\n')
+        if style == 'Viral':
+            pos = '\\an2\\pos(540,1352)\\fad(55,40)\\fscx62\\fscy62\\t(0,110,\\fscx116\\fscy116)\\t(110,205,\\fscx100\\fscy100)'
+        else:
+            pos = '\\an5\\pos(540,830)\\fad(60,110)\\t(0,240,\\alpha&H00&)\\t(290,330,\\alpha&H66&)\\t(365,425,\\alpha&H00&)\\t(510,565,\\alpha&H80&)\\t(625,685,\\alpha&H00&)'
+        f.write(f'Dialogue: 0,{ass_time(start)},{ass_time(end)},{style},,0,0,0,,{{{pos}}}{text}\n')
 
 s = {sc['id']: sc for sc in scenes}
 sfx = [
