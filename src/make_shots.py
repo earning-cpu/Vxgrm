@@ -47,7 +47,7 @@ SHOTS = {
 # scene-level FX applied after concat: list of fx names
 SCENE_FX = {
     'S01': ['rain', 'fog'],
-    'S02': [],
+    'S02': ['lift'],  # force fx path so the S02 gamma lift (build_video2.py) is applied
     'S03': ['fog'],
     'S04': [],
     'S05': ['flicker'],

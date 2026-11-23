@@ -86,6 +86,13 @@ for lt in (1.05, 1.12, 2.66, 2.73):
     f0 = int(round((_s10['actual_start'] + lt) * 30))
     for f in range(f0 - 1, f0 + 2):
         cut_frames.add(f)
+# stinger impact flash (white@0.55, 0.07s) + shake settle — intentional, audio-locked
+_stinger = next((t for n_, t in _tl.get('sfx', []) if n_ == 'stinger'), None)
+if _stinger is not None:
+    for tt in (_stinger, _stinger + 0.07):
+        f0 = int(round(tt * 30))
+        for f in range(f0 - 1, f0 + 2):
+            cut_frames.add(f)
 print(f'whitelisted cut/flash frames (±2/±1): {len(cut_frames)}')
 
 for i, m in enumerate(metrics):

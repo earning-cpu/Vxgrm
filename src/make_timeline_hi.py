@@ -8,6 +8,7 @@ ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
 FF = os.path.join(ROOT, '.venv', 'lib', 'python3.11', 'site-packages', 'imageio_ffmpeg', 'binaries', 'ffmpeg-linux-x86_64-v9.0.2')
 FADE = 0.45
 LEAD = 0.32          # silence before first word (fade-in breathes)
+ATEMPO = 1.22        # pitch-preserving speed-up of the VO to hit the tight cut; must match build_video2.py
 GAP = 0.09           # breath between chunks
 SCENE_TAIL = 0.42    # beat after last word of a scene
 S06_PRE = 0.78       # silence-before-drop pocket: riser lands, stinger hits, THEN VO
@@ -62,7 +63,7 @@ def vo_dur(path):
 durs = []
 for sid, fname, text, kw in CHUNKS:
     p = os.path.join(ROOT, 'assets', 'audio', 'hi', fname)
-    durs.append(vo_dur(p))
+    durs.append(vo_dur(p) / ATEMPO)
 
 # ---- layout in raw (pre-fade) time ----
 cursor = LEAD
@@ -87,7 +88,10 @@ ACTUAL_TOTAL = PRE_FADE_TOTAL - (len(scenes) - 1) * FADE
 
 # map raw -> actual (xfade compression)
 for i, sc in enumerate(scenes):
-    sc['actual_start'] = round(sc['scene_start'] - i * FADE, 4)
+    # xfade chain output starts at t=0 with S01 content; the LEAD is an audio-only head
+    # start, so visual scene positions are raw_start - LEAD - i*FADE (everything downstream
+    # — shots.json cuts, qa whitelist, scene FX — shifts together consistently).
+    sc['actual_start'] = round(sc['scene_start'] - LEAD - i * FADE, 4)
     sc['shift'] = i * FADE
     sc['scene_len'] = round(sc['scene_len'], 4)
     sc['scene_start'] = round(sc['scene_start'], 4)

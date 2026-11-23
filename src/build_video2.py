@@ -22,6 +22,8 @@ def run(args, desc):
     if p.returncode != 0:
         print(p.stderr[-4000:])
         sys.exit(f'FAILED: {desc}')
+    if os.environ.get('DEBUG_MIX'):
+        print('STDERR-TAIL:', p.stderr[-1600:])
     return p
 
 SKIP_VIDEO = os.environ.get('SKIP_VIDEO') == '1' and os.path.exists(os.path.join(WORK, 'scenefx_S11.mp4'))
@@ -82,6 +84,8 @@ def fx_chain(sid):
     # per-scene shadow lift: candlelit/collapse scenes are too dark for phone screens
     if sid in ('S07', 'S05', 'S09'):
         pre.append("eq=gamma=1.14")
+    if sid == 'S02':  # dark close-up punch crop — lift for phone screens
+        pre.append("eq=gamma=1.12")
     if 'flicker' in fx:
         pre.append("eq=brightness='0.016*sin(2*PI*3.1*t)+0.010*sin(2*PI*7.6*t+1.3)':eval=frame")
     if 'lightning' in fx:
@@ -174,17 +178,17 @@ vo_labels = ''
 for i, (path, t) in enumerate(vo_items):
     audio_inputs += ['-i', path]
     delay_ms = int(round(t * 1000))
-    filter_parts.append(f'[{idx}:a]aformat=channel_layouts=stereo,adelay={delay_ms}|{delay_ms},volume=1.0[vo{i}]')
+    filter_parts.append(f'[{idx}:a]aresample=48000,aformat=channel_layouts=stereo,atempo=1.22,acompressor=threshold=0.12:ratio=4:attack=5:release=140:makeup=1.9,adelay={delay_ms}|{delay_ms},volume=1.3[vo{i}]')
     vo_labels += f'[vo{i}]'
     idx += 1
 NUMVO = len(vo_items)
 filter_parts.append(f'{vo_labels}amix=inputs={NUMVO}:normalize=0:dropout_transition=0,aformat=channel_layouts=stereo[vomix]')
 
-amb = [('amb_drone.wav', 0.38), ('amb_wind.wav', 0.24)]
+amb = [('amb_drone.wav', 0.42), ('amb_wind.wav', 0.24)]
 other_labels = ''
 for name, vol in amb:
     audio_inputs += ['-i', os.path.join(ROOT, 'assets', 'audio', name)]
-    filter_parts.append(f'[{idx}:a]aformat=channel_layouts=stereo,atrim=0:{TOTAL:.2f},asetpts=PTS-STARTPTS,volume={vol}[amb{idx}]')
+    filter_parts.append(f'[{idx}:a]aresample=48000,aformat=channel_layouts=stereo,atrim=0:{TOTAL:.2f},asetpts=PTS-STARTPTS,volume={vol}[amb{idx}]')
     other_labels += f'[amb{idx}]'
     idx += 1
 
@@ -194,7 +198,7 @@ SFX_MAP = {'bell': ('sfx_bell.wav', 0.62), 'bell2': ('sfx_bell.wav', 0.45),
            'heartbeat': ('sfx_heartbeat.wav', 0.68), 'stinger': ('sfx_stinger.wav', 0.85),
            'rumble': ('sfx_rumble.wav', 0.55), 'tap': ('sfx_tap.wav', 0.55),
            'subdrop': ('sfx_subdrop.wav', 0.72), 'murmur': ('sfx_murmur.wav', 0.36),
-           'riser': ('sfx_riser.wav', 0.72)}
+           'riser': ('sfx_riser.wav', 0.85)}
 NSFX = 0
 for name, t in sfx_events:
     if name not in SFX_MAP:
@@ -202,7 +206,7 @@ for name, t in sfx_events:
     fname, vol = SFX_MAP[name]
     audio_inputs += ['-i', os.path.join(ROOT, 'assets', 'audio', fname)]
     delay_ms = int(round(t * 1000))
-    filter_parts.append(f'[{idx}:a]aformat=channel_layouts=stereo,adelay={delay_ms}|{delay_ms},volume={vol}[sfx{idx}]')
+    filter_parts.append(f'[{idx}:a]aresample=48000,aformat=channel_layouts=stereo,adelay={delay_ms}|{delay_ms},volume={vol}[sfx{idx}]')
     other_labels += f'[sfx{idx}]'
     idx += 1
     NSFX += 1
@@ -210,19 +214,19 @@ NOTHER = len(amb) + NSFX
 filter_parts.append(f'{other_labels}amix=inputs={NOTHER}:normalize=0:dropout_transition=0,aformat=channel_layouts=stereo[otherpre]')
 # key = VO: amb+SFX ducked automatically whenever narration is present
 filter_parts.append('[otherpre][vomix]sidechaincompress=threshold=0.02:ratio=7:attack=18:release=260:makeup=1.35[otherduck]')
-filter_parts.append('[vomix][otherduck]amix=inputs=2:normalize=0[premix]')
-filter_parts.append(f'[premix]highpass=f=25,afade=t=out:st={max(TOTAL-1.5,0.5):.2f}:d=1.5,loudnorm=I=-14:TP=-1.5:LRA=11:dual_mono=false[mixout]')
+filter_parts.append('[vomix][otherduck]amix=inputs=2:normalize=0,alimiter=limit=0.84:level=false:attack=5:release=50[premix]')
+filter_parts.append(f'[premix]highpass=f=25,afade=t=out:st={max(TOTAL-1.5,0.5):.2f}:d=1.5,volume=6.5dB,alimiter=limit=0.84:level=false:attack=5:release=50,aresample=48000,aformat=channel_layouts=stereo[mixout]')
 run([*audio_inputs, '-filter_complex', ';'.join(filter_parts),
-     '-map', '[mixout]', '-ar', '48000', '-c:a', 'pcm_s16le', mix], 'audio mix (sidechain-ducked) + riser')
+     '-map', '[mixout]', '-ar', '48000', '-ac', '2', '-c:a', 'pcm_s16le', mix], 'audio mix (sidechain-ducked) + riser')
 
 # ---------- Step 6: final mux + captions ----------
 final = os.path.join(OUT_DIR, 'dancing-plague-1518-true-story-short.mp4')
 run(['-i', graded, '-i', mix,
-     '-filter_complex', f"[0:v]scale=in_range=auto:out_range=limited,subtitles='{CAPTIONS}':fontsdir=/home/user/Vxgrm/assets/fonts,format=yuv420p[v]",
+     '-filter_complex', f"[0:v]scale=in_range=auto:out_range=limited,subtitles='{CAPTIONS}':fontsdir=/home/user/Vxgrm/assets/fonts,format=yuv420p,setsar=1[v]",
      '-map', '[v]', '-map', '1:a',
      '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', '-pix_fmt', 'yuv420p',
      '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709', '-color_range', 'tv',
-     '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart',
+     '-c:a', 'aac', '-b:a', '192k', '-ac', '2', '-movflags', '+faststart',
      '-shortest', final], 'final mux + caption burn')
 print(f'\nFINAL (Hindi v3) → {final}')
 print(f'expected duration ≈ {base_dur:.2f}s @30fps, 1080x1920')

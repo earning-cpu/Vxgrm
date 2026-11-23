@@ -1,5 +1,5 @@
 [Script Info]
-Title: Dancing Plague 1518 — Viral Captions
+Title: Dancing Plague 1518 — Hindi Captions (Devanagari)
 ScriptType: v4.00+
 PlayResX: 1080
 PlayResY: 1920
@@ -8,44 +8,34 @@ WrapStyle: 2
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Viral,DejaVu Sans Bold,60,&H00FFFFFF,&H000000FF,&H00000000,&H64000000,-1,0,1,3.6,1.8,2,55,55,560,1
-Style: DateFlash,DejaVu Sans Bold,46,&H004D48E5,&H000000FF,&H00000000,&H64000000,-1,0,1,2.6,1.3,5,30,30,0,1
+Style: Viral,Noto Sans Devanagari,54,&H00FFFFFF,&H9AFFFFFF,&H00000000,&H64000000,-1,0,1,3.4,1.6,2,48,48,560,1
+Style: DateFlash,Noto Sans Devanagari,52,&H004D48E5,&H000000FF,&H00000000,&H64000000,-1,0,1,2.6,1.3,5,24,24,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 0,0:00:00.06,0:00:02.30,DateFlash,,0,0,0,,{\an5\pos(540,830)\fad(60,110)\t(0,240,\alpha&H00&)\t(290,330,\alpha&H66&)\t(365,425,\alpha&H00&)\t(510,565,\alpha&H80&)\t(625,685,\alpha&H00&)}STRASBOURG · 14 JULY 1518
-Dialogue: 0,0:00:00.12,0:00:02.85,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}ON {\c&H4D48E5&}JULY 14TH, 1518{\c&HFFFFFF&} —
-Dialogue: 0,0:00:02.85,0:00:06.26,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}A WOMAN BEGAN TO DANCE
-Dialogue: 0,0:00:05.99,0:00:07.54,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}HISTORY CALLS HER
-Dialogue: 0,0:00:07.54,0:00:08.58,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\c&H4D48E5&}FRAU TROFFEA{\c&HFFFFFF&}.
-Dialogue: 0,0:00:08.58,0:00:10.65,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}NO MUSIC. NO REASON.
-Dialogue: 0,0:00:10.65,0:00:12.72,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}SHE {\c&H4D48E5&}COULD NOT STOP{\c&HFFFFFF&}.
-Dialogue: 0,0:00:12.57,0:00:15.31,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}SHE DANCED FOR DAYS.
-Dialogue: 0,0:00:15.31,0:00:18.06,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}THEN — {\c&H4D48E5&}THIRTY OTHERS{\c&HFFFFFF&} JOINED.
-Dialogue: 0,0:00:18.06,0:00:19.43,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}THEN {\c&H4D48E5&}400{\c&HFFFFFF&}.
-Dialogue: 0,0:00:19.28,0:00:20.25,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\c&H4D48E5&}VACANT EYES{\c&HFFFFFF&}.
-Dialogue: 0,0:00:20.25,0:00:22.67,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}FEET {\c&H4D48E5&}BLED{\c&HFFFFFF&} INTO THEIR SHOES.
-Dialogue: 0,0:00:22.67,0:00:24.61,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}THEY SCREAMED FOR HELP —
-Dialogue: 0,0:00:24.61,0:00:26.06,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}AND KEPT DANCING.
-Dialogue: 0,0:00:25.95,0:00:28.46,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}THE CITY COUNCIL'S CURE?
-Dialogue: 0,0:00:28.46,0:00:29.72,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\c&H4D48E5&}MORE DANCING{\c&HFFFFFF&}.
-Dialogue: 0,0:00:29.72,0:00:30.98,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\c&H4D48E5&}HIRED MUSICIANS{\c&HFFFFFF&}.
-Dialogue: 0,0:00:30.83,0:00:33.13,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}THE CURE WAS
-Dialogue: 0,0:00:33.13,0:00:34.67,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}THE {\c&H4D48E5&}CATASTROPHE{\c&HFFFFFF&}.
-Dialogue: 0,0:00:34.67,0:00:36.97,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}THE STREETS FILLED.
-Dialogue: 0,0:00:36.82,0:00:38.09,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}CHRONICLES CLAIM
-Dialogue: 0,0:00:38.09,0:00:41.25,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\c&H4D48E5&}15 DIED{\c&HFFFFFF&} IN ONE DAY.
-Dialogue: 0,0:00:41.25,0:00:44.41,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}THE TRUE TOLL IS {\c&H4D48E5&}LOST{\c&HFFFFFF&}.
-Dialogue: 0,0:00:44.30,0:00:46.58,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}MARCHED TO A SHRINE —
-Dialogue: 0,0:00:46.58,0:00:48.87,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\c&H4D48E5&}RED SHOES{\c&HFFFFFF&}, HOLY WATER,
-Dialogue: 0,0:00:48.87,0:00:50.01,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\c&H4D48E5&}SAINT VITUS{\c&HFFFFFF&}.
-Dialogue: 0,0:00:49.86,0:00:52.26,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}THEY BEGGED IN LATIN —
-Dialogue: 0,0:00:52.26,0:00:54.07,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}AND BY SEPTEMBER…
-Dialogue: 0,0:00:54.07,0:00:55.87,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}IT SIMPLY — {\c&H4D48E5&}STOPPED{\c&HFFFFFF&}.
-Dialogue: 0,0:00:55.84,0:00:57.15,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\c&H4D48E5&}STILL UNSOLVED{\c&HFFFFFF&}.
-Dialogue: 0,0:00:57.15,0:00:59.77,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\c&H4D48E5&}POISONED RYE{\c&HFFFFFF&}? MASS HYSTERIA?
-Dialogue: 0,0:00:59.77,0:01:01.74,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}OR SOMETHING THAT
-Dialogue: 0,0:01:01.74,0:01:03.70,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}WANTED THEM DANCING.
-Dialogue: 0,0:01:03.70,0:01:06.91,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}IF THE PLAGUE NEVER ENDED…
-Dialogue: 0,0:01:06.91,0:01:09.48,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}SOMEONE IS {\c&H4D48E5&}STILL DANCING{\c&HFFFFFF&}.
-Dialogue: 0,0:01:09.48,0:01:12.05,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\c&H4D48E5&}FOLLOW{\c&HFFFFFF&} FOR MORE\NTRUE NIGHTMARES
+Dialogue: 0,0:00:00.06,0:00:04.82,DateFlash,,0,0,0,,{\an5\pos(540,830)\fad(60,110)\t(0,240,\alpha&H00&)\t(290,330,\alpha&H66&)\t(365,425,\alpha&H00&)\t(510,565,\alpha&H80&)\t(625,685,\alpha&H00&)}14 JULY 1518 · स्ट्रासबर्ग
+Dialogue: 0,0:00:00.32,0:00:03.47,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k25}14 {\k63}जुलाई {\c&H4D48E5&\2c&H4D48E5&}{\k50}1518{\c&HFFFFFF&\2c&HFFFFFF&} {\k25}— {\k152}स्ट्रासबर्ग।
+Dialogue: 0,0:00:03.56,0:00:05.75,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k22}एक {\k33}औरत {\k44}सड़क {\k22}पर {\c&H4D48E5&\2c&H4D48E5&}{\k55}नाचने{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k44}लगी।{\c&HFFFFFF&\2c&HFFFFFF&}
+Dialogue: 0,0:00:05.72,0:00:08.35,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k58}इतिहास {\k29}उसे {\c&H4D48E5&\2c&H4D48E5&}{\k39}Frau{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k68}Troffea{\c&HFFFFFF&\2c&HFFFFFF&} {\k39}कहता {\k29}है।
+Dialogue: 0,0:00:08.44,0:00:11.98,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k23}न {\k69}संगीत, {\k23}न {\k34}वजह {\k23}— {\k23}वो {\c&H4D48E5&\2c&H4D48E5&}{\k34}रुक{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k46}नहीं{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k46}सकती{\c&HFFFFFF&\2c&HFFFFFF&} {\k33}थी।
+Dialogue: 0,0:00:11.95,0:00:14.11,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k22}वो {\c&H4D48E5&\2c&H4D48E5&}{\k97}दिनों-दिन{\c&HFFFFFF&\2c&HFFFFFF&} {\k54}नाचती {\k43}रही।
+Dialogue: 0,0:00:14.20,0:00:16.86,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k31}फिर {\k31}तीस {\k31}लोग {\k41}जुड़ {\k20}गए {\k20}— {\k31}फिर {\c&H4D48E5&\2c&H4D48E5&}{\k31}चार{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k30}सौ।{\c&HFFFFFF&\2c&HFFFFFF&}
+Dialogue: 0,0:00:16.83,0:00:18.53,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\c&H4D48E5&\2c&H4D48E5&}{\k57}आँखें{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k45}सूनी{\c&HFFFFFF&\2c&HFFFFFF&} {\k23}हो {\k45}गईं।
+Dialogue: 0,0:00:18.62,0:00:21.87,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k36}पैर {\k36}खून {\k24}से {\k36}लाल {\k24}— {\k36}फिर {\k24}भी {\c&H4D48E5&\2c&H4D48E5&}{\k60}नाचते{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k49}रहे।{\c&HFFFFFF&\2c&HFFFFFF&}
+Dialogue: 0,0:00:21.84,0:00:23.67,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k32}शहर {\k22}के {\k65}लीडर्स {\c&H4D48E5&\2c&H4D48E5&}{\k22}डर{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k22}गए{\c&HFFFFFF&\2c&HFFFFFF&} {\k21}—
+Dialogue: 0,0:00:23.76,0:00:26.49,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k47}इलाज {\k71}बताया: {\c&H4D48E5&\2c&H4D48E5&}{\k24}और{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k83}ज़्यादा{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k47}नाच!{\c&HFFFFFF&\2c&HFFFFFF&}
+Dialogue: 0,0:00:27.24,0:00:29.14,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k45}इलाज {\k22}ही {\c&H4D48E5&\2c&H4D48E5&}{\k56}तबाही{\c&HFFFFFF&\2c&HFFFFFF&} {\k22}बन {\k45}गया।
+Dialogue: 0,0:00:29.23,0:00:31.23,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k57}सड़कें {\k19}और {\k48}लोगों {\k19}से {\c&H4D48E5&\2c&H4D48E5&}{\k19}भर{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k38}गईं।{\c&HFFFFFF&\2c&HFFFFFF&}
+Dialogue: 0,0:00:31.20,0:00:32.94,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k23}कुछ {\k76}क्रोनिकल्स {\k15}का {\c&H4D48E5&\2c&H4D48E5&}{\k30}दावा{\c&HFFFFFF&\2c&HFFFFFF&} {\k15}है {\k15}—
+Dialogue: 0,0:00:33.03,0:00:35.16,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k21}एक {\k21}ही {\k32}दिन {\k32}में {\c&H4D48E5&\2c&H4D48E5&}{\k21}15{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k32}लोग{\c&HFFFFFF&\2c&HFFFFFF&} {\k21}मर {\k33}गए।
+Dialogue: 0,0:00:35.25,0:00:37.34,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k44}असली {\k55}गिनती {\k22}आज {\k22}भी {\c&H4D48E5&\2c&H4D48E5&}{\k33}गुम{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k34}है।{\c&HFFFFFF&\2c&HFFFFFF&}
+Dialogue: 0,0:00:37.31,0:00:39.77,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k43}उन्हें {\c&H4D48E5&\2c&H4D48E5&}{\k36}Saint{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k36}Vitus{\c&HFFFFFF&\2c&HFFFFFF&} {\k14}के {\k36}मंदिर {\k14}ले {\k29}जाया {\k22}गया {\k16}—
+Dialogue: 0,0:00:39.86,0:00:42.62,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\c&H4D48E5&\2c&H4D48E5&}{\k34}लाल{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k57}जूते,{\c&HFFFFFF&\2c&HFFFFFF&} {\k69}पवित्र {\k23}जल {\k23}से {\k69}ब्लेस।
+Dialogue: 0,0:00:42.59,0:00:44.65,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k61}उन्होंने {\k38}लैटिन {\k23}में {\c&H4D48E5&\2c&H4D48E5&}{\k38}माफ़ी{\c&HFFFFFF&\2c&HFFFFFF&} {\k47}माँगी…
+Dialogue: 0,0:00:44.74,0:00:49.24,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k41}और {\k122}सितंबर {\k41}तक {\k41}— {\k61}नाच {\c&H4D48E5&\2c&H4D48E5&}{\k61}रुक{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k82}गया।{\c&HFFFFFF&\2c&HFFFFFF&}
+Dialogue: 0,0:00:49.21,0:00:51.60,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k42}वजह {\k28}आज {\k28}भी {\c&H4D48E5&\2c&H4D48E5&}{\k98}अनसुलझी{\c&HFFFFFF&\2c&HFFFFFF&} {\k43}है।
+Dialogue: 0,0:00:51.69,0:00:54.77,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k74}जहरीला {\k49}राई? {\k25}या {\c&H4D48E5&\2c&H4D48E5&}{\k49}Mass{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k111}Hysteria?{\c&HFFFFFF&\2c&HFFFFFF&}
+Dialogue: 0,0:00:54.86,0:00:58.04,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k22}या {\k33}कुछ {\k33}ऐसा {\k22}जो {\k55}चाहता {\k22}था {\k22}— {\c&H4D48E5&\2c&H4D48E5&}{\k55}नाचते{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k54}रहें।{\c&HFFFFFF&\2c&HFFFFFF&}
+Dialogue: 0,0:00:58.01,0:01:00.27,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k26}अगर {\k43}प्लेग {\k26}कभी {\c&H4D48E5&\2c&H4D48E5&}{\k35}खत्म{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k17}ही{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k35}नहीं{\c&HFFFFFF&\2c&HFFFFFF&} {\k26}हुई {\k18}—
+Dialogue: 0,0:01:00.36,0:01:03.18,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k25}तो {\k49}कहीं {\k49}कोई… {\c&H4D48E5&\2c&H4D48E5&}{\k25}आज{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k25}भी{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k37}नाच{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k37}रहा{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k35}है।{\c&HFFFFFF&\2c&HFFFFFF&}
+Dialogue: 0,0:01:03.27,0:01:05.80,Viral,,0,0,0,,{\an2\pos(540,1352)\fad(55,40)\fscx62\fscy62\t(0,110,\fscx116\fscy116)\t(110,205,\fscx100\fscy100)}{\k23}ऐसी {\k38}सच्ची {\k61}कहानियों {\k15}के {\k23}लिए {\k15}— {\c&H4D48E5&\2c&H4D48E5&}{\k38}फ़ॉलो{\c&HFFFFFF&\2c&HFFFFFF&} {\c&H4D48E5&\2c&H4D48E5&}{\k39}करें।{\c&HFFFFFF&\2c&HFFFFFF&}
