@@ -1,0 +1,553 @@
+{
+ "file": "out/bhangarh_shorts.mp4",
+ "bytes": 41455311,
+ "duration": 60.44,
+ "frames": 1813,
+ "fps": 30,
+ "resolution": "1080x1920",
+ "sar": "1:1",
+ "video": {
+  "luma_mean": 37.3,
+  "luma_p10": 28.4,
+  "luma_p90": 43.2,
+  "contrast_mean": 92.5,
+  "pct_frames_in_healthy_range": 94.4,
+  "pct_frames_too_dark": 0.3,
+  "pct_frames_near_clip": 0.0,
+  "black_frames": 0,
+  "frozen_frame_pairs": 0,
+  "dull_lowcontrast_frames": 0,
+  "edge_diff_median": 0.15,
+  "edge_cut_threshold": 2.2,
+  "edge_diff_top": [
+   6.71,
+   6.88,
+   6.89,
+   7.15,
+   7.21,
+   7.33,
+   7.67,
+   7.69,
+   7.92,
+   7.95,
+   8.06,
+   9.22,
+   13.55,
+   13.75
+  ],
+  "cuts_detected": 28,
+  "cuts_expected": 30,
+  "cuts_matched": 27,
+  "cut_sync_max_ms": 122,
+  "missing_cuts": [
+   1.633,
+   38.078
+  ],
+  "extra_cuts": [
+   51.9
+  ],
+  "avg_shot_len": 2.02,
+  "min_shot_len": 1.17,
+  "max_shot_len": 3.33
+ },
+ "audio": {
+  "integrated_lufs": "-14.2",
+  "lra": "4.2",
+  "true_peak_dbfs": "-7.1",
+  "silence_runs": [],
+  "vo_rms_per_beat": [
+   {
+    "id": "b01",
+    "rms_db": -14.1,
+    "vo_dur": 5.169
+   },
+   {
+    "id": "b02",
+    "rms_db": -14.3,
+    "vo_dur": 5.127
+   },
+   {
+    "id": "b03",
+    "rms_db": -15.3,
+    "vo_dur": 7.33
+   },
+   {
+    "id": "b04",
+    "rms_db": -13.8,
+    "vo_dur": 5.18
+   },
+   {
+    "id": "b05",
+    "rms_db": -13.2,
+    "vo_dur": 7.223
+   },
+   {
+    "id": "b06",
+    "rms_db": -13.8,
+    "vo_dur": 3.696
+   },
+   {
+    "id": "b07",
+    "rms_db": -15.5,
+    "vo_dur": 9.001
+   },
+   {
+    "id": "b08",
+    "rms_db": -12.3,
+    "vo_dur": 5.504
+   },
+   {
+    "id": "b09",
+    "rms_db": -13.7,
+    "vo_dur": 4.027
+   },
+   {
+    "id": "b10",
+    "rms_db": -13.3,
+    "vo_dur": 4.382
+   }
+  ]
+ },
+ "beats": [
+  {
+   "id": "b01",
+   "t": [
+    0.0,
+    5.389
+   ],
+   "frames": 161,
+   "luma_mean": 32.0,
+   "luma_min": 27.700000762939453,
+   "luma_max": 193.8000030517578,
+   "contrast_mean": 67.3,
+   "shots": 3
+  },
+  {
+   "id": "b02",
+   "t": [
+    5.389,
+    10.736
+   ],
+   "frames": 161,
+   "luma_mean": 34.70000076293945,
+   "luma_min": 23.5,
+   "luma_max": 194.6999969482422,
+   "contrast_mean": 80.8,
+   "shots": 3
+  },
+  {
+   "id": "b03",
+   "t": [
+    10.736,
+    18.286
+   ],
+   "frames": 226,
+   "luma_mean": 34.099998474121094,
+   "luma_min": 27.100000381469727,
+   "luma_max": 193.60000610351562,
+   "contrast_mean": 93.8,
+   "shots": 3
+  },
+  {
+   "id": "b04",
+   "t": [
+    18.286,
+    23.686
+   ],
+   "frames": 162,
+   "luma_mean": 43.70000076293945,
+   "luma_min": 29.100000381469727,
+   "luma_max": 194.89999389648438,
+   "contrast_mean": 131.3,
+   "shots": 3
+  },
+  {
+   "id": "b05",
+   "t": [
+    23.686,
+    31.129
+   ],
+   "frames": 223,
+   "luma_mean": 35.400001525878906,
+   "luma_min": 30.5,
+   "luma_max": 193.5,
+   "contrast_mean": 70.3,
+   "shots": 3
+  },
+  {
+   "id": "b06",
+   "t": [
+    31.129,
+    35.045
+   ],
+   "frames": 118,
+   "luma_mean": 37.5,
+   "luma_min": 30.299999237060547,
+   "luma_max": 193.3000030517578,
+   "contrast_mean": 83.1,
+   "shots": 3
+  },
+  {
+   "id": "b07",
+   "t": [
+    35.045,
+    44.266
+   ],
+   "frames": 276,
+   "luma_mean": 36.29999923706055,
+   "luma_min": 20.799999237060547,
+   "luma_max": 193.8000030517578,
+   "contrast_mean": 97.8,
+   "shots": 3
+  },
+  {
+   "id": "b08",
+   "t": [
+    44.266,
+    49.99
+   ],
+   "frames": 172,
+   "luma_mean": 54.400001525878906,
+   "luma_min": 29.899999618530273,
+   "luma_max": 193.5,
+   "contrast_mean": 160.3,
+   "shots": 3
+  },
+  {
+   "id": "b09",
+   "t": [
+    49.99,
+    54.236
+   ],
+   "frames": 128,
+   "luma_mean": 32.400001525878906,
+   "luma_min": 22.600000381469727,
+   "luma_max": 36.900001525878906,
+   "contrast_mean": 67.6,
+   "shots": 3
+  },
+  {
+   "id": "b10",
+   "t": [
+    54.236,
+    60.438
+   ],
+   "frames": 186,
+   "luma_mean": 33.29999923706055,
+   "luma_min": 26.399999618530273,
+   "luma_max": 194.10000610351562,
+   "contrast_mean": 68.4,
+   "shots": 3
+  }
+ ],
+ "shots": [
+  {
+   "beat": "b01",
+   "t": 0.0,
+   "img": "s01_hook",
+   "cam": "punch",
+   "grade": "night",
+   "dur": 1.633,
+   "luma": 35.2,
+   "contrast": 58.8
+  },
+  {
+   "beat": "b01",
+   "t": 1.633,
+   "img": "s01_gate",
+   "cam": "zin",
+   "grade": "night",
+   "dur": 1.3,
+   "luma": 30.1,
+   "contrast": 64.7
+  },
+  {
+   "beat": "b01",
+   "t": 2.933,
+   "img": "s07_ruins",
+   "cam": "zin",
+   "grade": "cold",
+   "dur": 2.467,
+   "luma": 30.9,
+   "contrast": 74.3
+  },
+  {
+   "beat": "b02",
+   "t": 5.389,
+   "img": "s02_fort_wide",
+   "cam": "panL",
+   "grade": "cold",
+   "dur": 1.833,
+   "luma": 45.3,
+   "contrast": 111.8
+  },
+  {
+   "beat": "b02",
+   "t": 7.222,
+   "img": "s07_ruins",
+   "cam": "zout",
+   "grade": "cold",
+   "dur": 1.667,
+   "luma": 30.7,
+   "contrast": 75.1
+  },
+  {
+   "beat": "b02",
+   "t": 8.889,
+   "img": "s01_hook",
+   "cam": "tiltUp",
+   "grade": "night",
+   "dur": 1.867,
+   "luma": 27.9,
+   "contrast": 55.3
+  },
+  {
+   "beat": "b03",
+   "t": 10.736,
+   "img": "s03_sadhu",
+   "cam": "zin",
+   "grade": "night",
+   "dur": 2.733,
+   "luma": 33.3,
+   "contrast": 72.5
+  },
+  {
+   "beat": "b03",
+   "t": 13.469,
+   "img": "s03_sadhu_up",
+   "cam": "panL",
+   "grade": "warm",
+   "dur": 2.267,
+   "luma": 28.1,
+   "contrast": 59.9
+  },
+  {
+   "beat": "b03",
+   "t": 15.736,
+   "img": "s04_shrine",
+   "cam": "drift",
+   "grade": "dusk",
+   "dur": 2.567,
+   "luma": 40.2,
+   "contrast": 147.0
+  },
+  {
+   "beat": "b04",
+   "t": 18.286,
+   "img": "s04_shadow",
+   "cam": "zin",
+   "grade": "dusk",
+   "dur": 1.833,
+   "luma": 48.6,
+   "contrast": 148.3
+  },
+  {
+   "beat": "b04",
+   "t": 20.119,
+   "img": "s04_shrine",
+   "cam": "tiltUp",
+   "grade": "warm",
+   "dur": 1.633,
+   "luma": 39.6,
+   "contrast": 139.2
+  },
+  {
+   "beat": "b04",
+   "t": 21.753,
+   "img": "s07_archive",
+   "cam": "zout",
+   "grade": "cold",
+   "dur": 1.933,
+   "luma": 42.7,
+   "contrast": 108.4
+  },
+  {
+   "beat": "b05",
+   "t": 23.686,
+   "img": "s05_princess",
+   "cam": "zin",
+   "grade": "night",
+   "dur": 2.533,
+   "luma": 39.6,
+   "contrast": 71.9
+  },
+  {
+   "beat": "b05",
+   "t": 26.219,
+   "img": "s05_corridor",
+   "cam": "panL",
+   "grade": "warm",
+   "dur": 2.467,
+   "luma": 34.9,
+   "contrast": 76.2
+  },
+  {
+   "beat": "b05",
+   "t": 28.686,
+   "img": "s05_ghost",
+   "cam": "drift",
+   "grade": "night",
+   "dur": 2.467,
+   "luma": 31.5,
+   "contrast": 62.6
+  },
+  {
+   "beat": "b06",
+   "t": 31.129,
+   "img": "s05_ghost",
+   "cam": "punch",
+   "grade": "night",
+   "dur": 1.333,
+   "luma": 39.0,
+   "contrast": 65.7
+  },
+  {
+   "beat": "b06",
+   "t": 32.462,
+   "img": "s05_corridor",
+   "cam": "zin",
+   "grade": "night",
+   "dur": 1.167,
+   "luma": 35.2,
+   "contrast": 74.2
+  },
+  {
+   "beat": "b06",
+   "t": 33.629,
+   "img": "s02_fort_wide",
+   "cam": "zout",
+   "grade": "cold",
+   "dur": 1.4,
+   "luma": 38.1,
+   "contrast": 106.6
+  },
+  {
+   "beat": "b07",
+   "t": 35.045,
+   "img": "s07_archive",
+   "cam": "zout",
+   "grade": "cold",
+   "dur": 3.033,
+   "luma": 41.2,
+   "contrast": 108.5
+  },
+  {
+   "beat": "b07",
+   "t": 38.078,
+   "img": "s02_fort_wide",
+   "cam": "panL",
+   "grade": "cold",
+   "dur": 2.867,
+   "luma": 40.2,
+   "contrast": 110.9
+  },
+  {
+   "beat": "b07",
+   "t": 40.945,
+   "img": "s07_ruins",
+   "cam": "tiltUp",
+   "grade": "warm",
+   "dur": 3.333,
+   "luma": 28.4,
+   "contrast": 76.8
+  },
+  {
+   "beat": "b08",
+   "t": 44.266,
+   "img": "s08_sign",
+   "cam": "zin",
+   "grade": "cold",
+   "dur": 1.833,
+   "luma": 53.9,
+   "contrast": 155.9
+  },
+  {
+   "beat": "b08",
+   "t": 46.099,
+   "img": "bg_doccard",
+   "cam": "drift",
+   "grade": "cold",
+   "dur": 2.067,
+   "luma": 60.3,
+   "contrast": 199.8
+  },
+  {
+   "beat": "b08",
+   "t": 48.166,
+   "img": "s09_leopard",
+   "cam": "punch",
+   "grade": "night",
+   "dur": 1.833,
+   "luma": 48.5,
+   "contrast": 120.0
+  },
+  {
+   "beat": "b09",
+   "t": 49.99,
+   "img": "s05_princess",
+   "cam": "nin",
+   "grade": "night",
+   "dur": 1.4,
+   "luma": 35.2,
+   "contrast": 69.8
+  },
+  {
+   "beat": "b09",
+   "t": 51.39,
+   "img": "s05_corridor",
+   "cam": "panR",
+   "grade": "night",
+   "dur": 1.267,
+   "luma": 36.4,
+   "contrast": 77.4
+  },
+  {
+   "beat": "b09",
+   "t": 52.657,
+   "img": "s01_hook",
+   "cam": "zin",
+   "grade": "night",
+   "dur": 1.567,
+   "luma": 26.8,
+   "contrast": 58.0
+  },
+  {
+   "beat": "b10",
+   "t": 54.236,
+   "img": "bg_end",
+   "cam": "drift",
+   "grade": "night",
+   "dur": 1.867,
+   "luma": 36.7,
+   "contrast": 53.6
+  },
+  {
+   "beat": "b10",
+   "t": 56.103,
+   "img": "s01_gate",
+   "cam": "zout",
+   "grade": "night",
+   "dur": 1.867,
+   "luma": 32.1,
+   "contrast": 69.9
+  },
+  {
+   "beat": "b10",
+   "t": 57.969,
+   "img": "s09_leopard",
+   "cam": "zin",
+   "grade": "night",
+   "dur": 2.467,
+   "luma": 31.6,
+   "contrast": 78.4
+  }
+ ],
+ "subtitle_band": {
+  "frames_with_white_text_pct": 76.1,
+  "min_band_luma": 16.5,
+  "max_band_luma": 231.1
+ },
+ "hud_band": {
+  "frames_with_text_pct": 100.0
+ }
+}

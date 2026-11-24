@@ -1,0 +1,12 @@
+# python env
+.venv/
+__pycache__/
+*.pyc
+
+# ffmpeg intermediates (regenerable: python build/audio_build.py && python build/video_build.py)
+work/
+tools_audio_prep.py
+
+# generated deliverable: keep the final mp4, ignore encoder experiments
+out/*.mp4
+!out/bhangarh_shorts.mp4

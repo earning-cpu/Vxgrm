@@ -1,0 +1,28 @@
+{
+  "title": "भानगढ़ किला — जहाँ सूरज ढलने के बाद जाना बैन है",
+  "format": "YouTube Shorts 9:16, 1080x1920, ~56s",
+  "fact_basis": [
+    "Bhangarh Fort, Alwar district, Rajasthan — founded ~1573 (Bhagwant Das / Madho Singh I)",
+    "ASI board: entry prohibited before sunrise and after sunset",
+    "Legend 1: Guru Balu Nath's condition — no building shadow on his meditation spot",
+    "Legend 2: tantrik Singhia, enchanted perfume, Princess Ratnavati, dying curse (~1720)",
+    "Abandoned by 1783 after famine, conflict and migration; protected monument since 1951",
+    "Practical ban reasons: unlit/roofless ruins, structural risk, Sariska Tiger Reserve buffer wildlife"
+  ],
+  "beats": [
+    {"id": "b01", "t": 0.0,  "hi": "एक ऐसा किला जहाँ सूरज ढलने के बाद जाना सरकार ने बैन कर दिया है।", "en": "A fort where the government banned entry after sunset.", "visual": "hook_black"},
+    {"id": "b02", "t": 4.4,  "hi": "भानगढ़ फोर्ट, राजस्थान। दुनिया का सबसे डरावना इलाका माना जाता है।", "en": "Bhangarh Fort, Rajasthan.", "visual": "fort_wide"},
+    {"id": "b03", "t": 9.4,  "hi": "कहानी नंबर एक — गुरु बालू नाथ। शर्त थी, मेरी समाधि पर महल की परछाईं नहीं पड़ेगी।", "en": "Story one: Guru Balu Nath's condition.", "visual": "sadhu"},
+    {"id": "b04", "t": 15.4, "hi": "राजा ने महल ऊँचा कर दिया। परछाईं पड़ी... और पूरा शहर तबाह।", "en": "The shadow fell. The city fell.", "visual": "shadow_fall"},
+    {"id": "b05", "t": 20.8, "hi": "कहानी नंबर दो — तांत्रिक सिंघिया और राजकुमारी रत्नावती। इत्र में जादू, और मौत का श्राप।", "en": "Story two: Singhia and Ratnavati.", "visual": "princess"},
+    {"id": "b06", "t": 27.2, "hi": "मरते वक़्त सिंघिया ने कहा — इस किले में कोई सुख से नहीं रहेगा।", "en": "The dying curse.", "visual": "curse"},
+    {"id": "b07", "t": 32.6, "hi": "असली इतिहास? 1783 तक भानगढ़ पूरी तरह वीरान हो चुका था — अकाल, जंग, और पलायन।", "en": "The real history: abandoned by 1783.", "visual": "archive"},
+    {"id": "b08", "t": 38.6, "hi": "तो रात का बैन क्यों? बिना छत के खंडहर, घुप्प अंधेरा... और सरिस्का के तेंदुए।", "en": "So why the night ban? Ruins, darkness, leopards.", "visual": "asi_sign"},
+    {"id": "b09", "t": 44.8, "hi": "लेकिन लोग कहते हैं — आज भी वहाँ बाज़ार की आवाज़ें आती हैं।", "en": "But people say the bazaar sounds still come.", "visual": "bazaar"},
+    {"id": "b10", "t": 50.0, "hi": "अगर तुम्हें वहाँ रात में छोड़ दिया जाए... तो क्या करोगे? कमेंट करो।", "en": "What would you do? Comment.", "visual": "end"}
+  ],
+  "whisper": {
+    "hi_a": "रत्नावती... ये इत्र तुम्हारे लिए है...",
+    "hi_b": "अब तुम भी यहीं रुको..."
+  }
+}
