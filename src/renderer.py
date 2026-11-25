@@ -6,6 +6,7 @@ from PIL import Image, ImageFilter
 from functools import lru_cache
 
 from . import design as D
+from . import paper as P
 from .text_engine import rasterize, blend_onto, blur_alpha, over
 from . import timeline as TL
 
@@ -34,7 +35,7 @@ class _PlateCache:
         s = base * 1.55
         nw, nh = int(iw * s), int(ih * s)
         im = im.resize((nw, nh), Image.LANCZOS)
-        im = im.filter(ImageFilter.UnsharpMask(radius=1.6, percent=55, threshold=2))
+        im = im.filter(ImageFilter.UnsharpMask(radius=1.5, percent=38, threshold=3))
         arr = np.asarray(im, dtype=np.float32) / 255.0
         if grade:
             warm, sat, contrast, darken = grade
@@ -164,57 +165,50 @@ def _place(img, rgba, x, y, scale=1.0, alpha=1.0):
 
 
 def draw_cue(img, cue, t):
+    """Draw a text cue on a torn-paper label (the film's type system)."""
     if t < cue.t0 - 0.001 or t > cue.t1 + 0.001:
         return
     p_in = np.clip((t - cue.t0) / max(cue.fade_in, 1e-3), 0, 1)
     p_out = np.clip((cue.t1 - t) / max(cue.fade_out, 1e-3), 0, 1)
-    alpha = min(float(p_in), float(p_out))
-    alpha = alpha ** 0.75
+    alpha = min(float(p_in), float(p_out)) ** 0.75
 
     scale, dy, dx = 1.0, 0.0, 0.0
     if cue.anim == "pop":
         e = ease_out_back(p_in, 1.6)
-        scale = 0.70 + 0.30 * e
+        scale = 0.72 + 0.28 * e
         dy = (1 - ease_out_cubic(p_in)) * 26
     elif cue.anim == "slide":
         dy = (1 - ease_out_cubic(p_in)) * 64
-        scale = 1.0
     elif cue.anim == "punch":
         k = np.clip((t - cue.t0) / 0.20, 0, 1)
-        scale = 1.0 + 0.18 * (1 - k) ** 2
-        dy = 0.0
+        scale = 1.0 + 0.20 * (1 - k) ** 2
     elif cue.anim == "glitch":
         e = ease_out_cubic(p_in)
         scale = 0.92 + 0.08 * e
         dy = (1 - e) * 14
     elif cue.anim == "type":
-        scale = 1.0
-    elif cue.anim == "button":
-        k = np.clip((t - cue.t0) / 0.26, 0, 1)
-        scale = 0.86 + 0.14 * ease_out_back(k, 2.2)
-        dy = (1 - ease_out_cubic(k)) * 20
+        pass
 
     if cue.shake:
         rng = np.random.default_rng(int(t * 1000) % 99991)
         dx += rng.normal(0, cue.shake)
         dy += rng.normal(0, cue.shake)
 
-    btn_dx = 0.0
-    if cue.anim == "button":
-        btn_dx = _draw_pill(img, cue, t, alpha, scale, dy)
-
+    # ---------------------------------------------------------- ink layout
+    base_col = _ink_color(cue.paper, cue.color)
+    hl_col = _hl_ink(cue.paper)
+    # ink printed on light card needs no outline; bone on dark card does
+    base_stroke = 0 if cue.paper == "parchment" else cue.stroke
     segs = _rich_segments(cue)
-    layers = []
-    total_w = 0.0
+    layers, total_w = [], 0.0
     for txt, col in segs:
         is_hl = col is cue.hl_color
-        use_col = (255, 52, 58) if is_hl else col
-        st = cue.stroke + (4 if is_hl else 0)
-        rgba, bb = text_layer(txt, cue.font, int(cue.size * 1.30), use_col, st, cue.tracking)
+        use = hl_col if is_hl else base_col
+        st = (cue.stroke if is_hl else base_stroke)
+        rgba, bb = text_layer(txt, cue.font, int(cue.size * 1.30), use, st, cue.tracking)
         ox, oy, ex, ey = bb
-        iw = (ex - ox) * scale
-        layers.append([rgba, bb, iw, is_hl])
-        total_w += iw
+        layers.append([rgba, bb, (ex - ox) * scale, is_hl])
+        total_w += (ex - ox) * scale
 
     if total_w > cue.max_w:
         f = cue.max_w / total_w
@@ -223,58 +217,102 @@ def draw_cue(img, cue, t):
             L[2] *= f
         total_w = cue.max_w
 
-    x = cue.x * W - total_w / 2 + btn_dx
+    # union of the ink's vertical extent, in layer space
+    ink_top = min(L[1][1] for L in layers) * scale
+    ink_bot = max(L[1][3] for L in layers) * scale
+    ink_h = max(1.0, ink_bot - ink_top)
 
-    # marker boxes behind highlighted words (guarantees legibility on any plate)
-    if cue.hl:
+    cx = cue.x * W
+    cy = cue.y * H + dy
+
+    # ------------------------------------------------------- paper label
+    if cue.paper:
+        pad_x = cue.size * 0.40 * scale
+        pad_y = cue.size * 0.30 * scale
+        P.panel(img, cx - total_w / 2 - pad_x, cy - ink_h / 2 - pad_y,
+                cx + total_w / 2 + pad_x, cy + ink_h / 2 + pad_y,
+                _paper_color(cue.paper),
+                seed=cue.seed if cue.seed else int(abs(hash(cue.text)) % 9973),
+                alpha=alpha * cue.paper_alpha, rough=cue.paper_rough)
+
+    # -------------------------------------------- oxide label behind a word
+    x = cx - total_w / 2
+    if cue.hl and cue.paper == "parchment":
         for rgba, bb, iw, is_hl in layers:
             if not is_hl:
+                x += iw
                 continue
             ox, oy, ex, ey = bb
-            ih = (ey - oy) * scale
-            pad_x, pad_y = cue.size * 0.17, cue.size * 0.075
-            bx0, by0 = x - ox * scale - pad_x, cue.y * H - ih / 2 - pad_y + dy
-            bx1, by1 = x - ox * scale + iw + pad_x, cue.y * H + ih / 2 + pad_y + dy
-            D.fill_rr(img, (bx0, by0, bx1, by1), cue.size * 0.13, (10, 5, 6), 0.88 * alpha)
-            D.fill_rr(img, (bx0, by0, bx0 + cue.size * 0.085, by1), cue.size * 0.04,
-                      (214, 30, 36), 0.95 * alpha)
-            D.stroke_rr(img, (bx0, by0, bx1, by1), cue.size * 0.13, (150, 24, 30), 1.6,
-                        0.45 * alpha)
+            hx0 = x - ox * scale - cue.size * 0.20 * scale
+            hx1 = x - ox * scale + iw + cue.size * 0.20 * scale
+            hy0 = cy - ink_h / 2 + (oy * scale - ink_top) - cue.size * 0.10 * scale
+            hy1 = cy - ink_h / 2 + (ey * scale - ink_top) + cue.size * 0.10 * scale
+            P.panel(img, hx0, hy0, hx1, hy1, P.OXIDE,
+                    seed=int(abs(hash(cue.text + cue.hl)) % 9973),
+                    alpha=alpha * 0.98, rough=cue.paper_rough * 1.2,
+                    shadow_px=8.0)
             x += iw
 
-    x = cue.x * W - total_w / 2 + btn_dx
+    # ------------------------------------------------------------- ink
+    x = cx - total_w / 2
     for rgba, bb, iw, is_hl in layers:
         ox, oy, ex, ey = bb
-        ih = (ey - oy) * scale
         px = x - ox * scale
-        py = cue.y * H - ih / 2 - oy * scale + dy
+        py = cy - ink_h / 2 - ink_top          # shared origin: union of ink is centred
         _place(img, rgba, px + dx, py, scale, alpha)
         x += iw
 
+    # ------------------------------------------------------------ sub line
     if cue.sub:
-        rgba, bb = text_layer(cue.sub, "dev", int(cue.sub_size * 1.30), cue.sub_color, 5, 0.0)
+        rgba, bb = text_layer(cue.sub, "dev", int(cue.sub_size * 1.30), P.INK, 0, 0.0)
         ox, oy, ex, ey = bb
         iw = (ex - ox) * scale
-        px = cue.x * W - iw / 2 - ox * scale
-        py = cue.y * H + cue.size * 0.62 - oy * scale + dy
-        _place(img, rgba, px + dx, py, scale, alpha * 0.95)
+        ih = (ey - oy) * scale
+        sh = ih + cue.sub_size * 0.70 * scale
+        px = cx - iw / 2
+        py = cy + ink_h / 2 + cue.size * 0.52 * scale
+        P.panel(img, px - cue.sub_size * 0.55 * scale, py,
+                px + iw + cue.sub_size * 0.55 * scale, py + sh,
+                P.PARCHMENT_DK, seed=int(abs(hash(cue.sub)) % 9973),
+                alpha=alpha * 0.97, rough=cue.paper_rough, shadow_px=7.0)
+        _place(img, rgba, px + dx, py + (sh - ih) / 2 - oy * scale, scale, alpha)
 
-    if cue.glitch:
-        pass
+
+def _paper_color(kind):
+    return {"parchment": P.PARCHMENT, "charcoal": P.CHARCOAL,
+            "oxide": P.OXIDE}.get(kind, P.PARCHMENT)
+
+
+def _ink_color(kind, fallback):
+    if kind in ("charcoal", "oxide"):
+        return P.BONE
+    if kind == "parchment":
+        return P.INK
+    return fallback
+
+
+def _hl_ink(kind):
+    """Ink for the highlighted word. On dark card it must be a bright accent,
+    never dark-on-dark."""
+    return P.BONE if kind == "parchment" else (232, 92, 74)
+
 
 
 # =============================================================== overlays
-def draw_progress(img, t, t_start=4.30, t_end=61.40):
+def draw_progress(img, t, t_start=0.0, t_end=66.20):
+    """Thin paper ribbon along the very top: a retention cue, not a broadcast bar."""
     if t < t_start:
         return
-    p = np.clip((t - t_start) / (t_end - t_start), 0, 1)
-    hh = 6
-    y = 96
-    img[y:y + hh, 0:W] *= 0.35
-    x1 = int(W * p)
-    img[y:y + hh, 0:x1, 0] = img[y:y + hh, 0:x1, 0] * 0.2 + 0.80
-    img[y:y + hh, 0:x1, 1] = img[y:y + hh, 0:x1, 1] * 0.2 + 0.10
-    img[y:y + hh, 0:x1, 2] = img[y:y + hh, 0:x1, 2] * 0.2 + 0.12
+    p = np.clip((t - t_start) / max(t_end - t_start, 1e-3), 0, 1)
+    y, hh = 44, 5
+    x0, x1 = 64, W - 64
+    track = np.array([0.78, 0.74, 0.66], dtype=np.float32)
+    fill = np.array([0.60, 0.13, 0.11], dtype=np.float32)
+    reg = img[y:y + hh, x0:x1]
+    reg[...] = reg * 0.30 + track * 0.70
+    k = x0 + int((x1 - x0) * p)
+    if k > x0:
+        img[y:y + hh, x0:k] = fill
 
 
 _TILE = {}

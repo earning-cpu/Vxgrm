@@ -7,7 +7,7 @@ from scipy import signal as sg
 import imageio_ffmpeg
 
 SR = 48000
-DUR = 64.6
+DUR = 66.8
 N = int(SR * DUR)
 
 RNG = np.random.default_rng(20261124)
@@ -316,94 +316,94 @@ def build_audio(shots, out_wav, vo_start=None, tempo=1.18, stems=False):
     music = np.zeros((N, 2), dtype=np.float64)
 
     # A: hook drone
-    place(music, drone(4.6, 73.42, 0.85, 0.0), 0.0)
+    place(music, drone(4.2, 73.42, 0.85, 0.0), 0.0)
     # B: setup
-    place(music, drone(16.0, 73.42, 0.62, 0.25), 4.3)
-    place(music, drone(7.0, 55.0, 0.55, 0.10), 13.0)
+    place(music, drone(8.6, 73.42, 0.62, 0.25), 3.95)
+    place(music, drone(5.2, 55.0, 0.55, 0.10), 12.45)
     # C: the order - thin, tense
-    place(music, drone(2.6, 82.41, 0.40, 0.05), 19.2)
+    place(music, drone(2.8, 82.41, 0.40, 0.05), 17.55)
     # D: chase
-    place(music, drone(14.4, 73.42, 0.72, 0.55), 21.6)
+    place(music, drone(6.4, 73.42, 0.72, 0.55), 26.70)
     # E: the cry
-    place(music, drone(3.6, 61.74, 0.95, 0.15), 35.5)
+    place(music, drone(2.5, 61.74, 0.95, 0.15), 32.85)
     # F: aftermath
-    place(music, drone(8.2, 73.42, 0.50, 0.0), 38.8)
+    place(music, drone(9.9, 73.42, 0.50, 0.0), 35.10)
     # G: fire
-    place(music, drone(3.4, 49.0, 0.70, 0.7), 46.6)
+    place(music, drone(3.7, 49.0, 0.70, 0.7), 44.90)
     # H: legend
-    place(music, drone(10.0, 73.42, 0.55, 0.10), 49.7)
-    # I: scare
-    place(music, drone(2.2, 46.25, 0.80, 0.2), 59.3)
-    # J: CTA
-    place(music, drone(3.2, 73.42, 0.55, 0.2), 61.3)
+    place(music, drone(8.4, 73.42, 0.55, 0.10), 48.40)
+    # I: the doorway
+    place(music, drone(7.0, 61.74, 0.62, 0.2), 56.60)
+    # J: end
+    place(music, drone(4.4, 73.42, 0.50, 0.2), 62.2)
 
     music *= duck[:, None]
     music_gain = 0.30
     buf += music * music_gain
 
     # ---------------- sub hits & pulses
-    for t in [0.0, 2.35, 4.30, 7.10, 10.20, 13.30, 16.30, 19.20, 21.60, 24.60,
-              27.60, 31.10, 34.30, 35.60, 38.90, 42.40, 45.00, 46.70, 49.80,
-              53.20, 56.60, 59.40, 61.40]:
+    for t in [0.0, 3.95, 12.45, 17.55, 23.05, 26.70, 35.10, 42.60, 48.40]:
         place(buf, sub_hit(1.2, 62, 30, 0.42), t, 1.0, 0.0)
-    place(buf, sub_hit(2.4, 48, 24, 1.0), 35.60, 1.0)
-    place(buf, sub_hit(2.0, 44, 22, 0.95), 59.40, 1.0)
-    place(buf, sub_hit(2.4, 40, 20, 0.9), 61.40, 1.0)
+    place(buf, sub_hit(2.4, 48, 24, 1.0), 32.85, 1.0)
+    place(buf, sub_hit(2.0, 44, 22, 0.95), 44.90, 1.0)
+    place(buf, sub_hit(2.6, 40, 20, 0.9), 56.60, 1.0)
 
     # ---------------- transition SFX driven by the shot list
-    for s in shots:
-        if s.trans == "whip":
-            place(buf, whoosh(0.55, True, 0.55, seed=hash(s.plate or "") % 997), s.t0, 1.0, -0.2)
-        elif s.trans == "glitch":
-            place(buf, glitch_sting(0.40), s.t0, 1.0, 0.15)
-        elif s.trans == "flash":
-            place(buf, impact(0.62, 1.4), s.t0, 1.0, 0.0)
-        elif s.trans == "dip":
-            place(buf, sub_hit(1.6, 50, 26, 0.5), s.t0, 1.0, 0.0)
+    for sh in shots:
+        if sh.trans == "whip":
+            place(buf, whoosh(0.55, True, 0.55, seed=hash(sh.plate or "") % 997), sh.t0, 1.0, -0.2)
+        elif sh.trans == "glitch":
+            place(buf, glitch_sting(0.40), sh.t0, 1.0, 0.15)
+        elif sh.trans == "flash":
+            place(buf, impact(0.62, 1.4), sh.t0, 1.0, 0.0)
+        elif sh.trans == "dip":
+            place(buf, sub_hit(1.6, 50, 26, 0.5), sh.t0, 1.0, 0.0)
 
     # ---------------- chase heartbeat
     hb = heartbeat(1.0, 1.0)
-    t = 24.6
-    while t < 35.4:
-        bpm = 62 + (t - 24.6) * 4.2
+    t = 26.70
+    while t < 32.85:
+        bpm = 62 + (t - 26.70) * 4.6
         place(buf, hb, t, 0.55, 0.0)
         t += 60.0 / bpm
-    # heartbeat in the order section (slower, quieter)
-    t = 19.4
-    while t < 21.4:
+    # heartbeat under the order (slower, quieter)
+    t = 17.60
+    while t < 21.0:
         place(buf, hb, t, 0.34, 0.0)
         t += 1.25
 
     # ---------------- foley
-    place(buf, paper(0.55), 13.45, 1.0, -0.15)
-    place(buf, paper(0.45), 17.15, 1.0, -0.15)
-    place(buf, metal_clash(0.45), 21.65, 1.0, 0.2)
-    place(buf, metal_clash(0.30), 24.65, 1.0, -0.1)
-    place(buf, clock_tick(0.22), 22.20, 1.0, 0.3)
+    place(buf, paper(0.55), 12.60, 1.0, -0.15)
+    place(buf, paper(0.45), 17.70, 1.0, -0.15)
+    place(buf, metal_clash(0.45), 23.15, 1.0, 0.2)
+    place(buf, metal_clash(0.30), 24.60, 1.0, -0.1)
+    place(buf, clock_tick(0.22), 19.60, 1.0, 0.3)
 
     # ---------------- fire
-    place(buf, fire(3.6, 0.85), 46.6, 1.0, 0.0)
+    place(buf, fire(3.6, 0.85), 44.90, 1.0, 0.0)
 
     # ---------------- wind / atmosphere
     place(buf, wind(6.0, 0.30), 0.0, 1.0, -0.3)
-    place(buf, wind(9.0, 0.26), 38.8, 1.0, 0.25)
-    place(buf, wind(10.0, 0.30), 49.7, 1.0, -0.2)
+    place(buf, wind(9.5, 0.26), 35.10, 1.0, 0.25)
+    place(buf, wind(10.0, 0.30), 48.40, 1.0, -0.2)
+    place(buf, wind(9.5, 0.24), 56.60, 1.0, 0.3)
 
     # ---------------- whispers in the legend section
-    place(buf, whispers(9.5, 0.16, 71), 49.9, 1.0, -0.35)
-    place(buf, whispers(8.0, 0.12, 73), 51.2, 1.0, 0.35)
+    place(buf, whispers(9.5, 0.16, 71), 48.60, 1.0, -0.35)
+    place(buf, whispers(8.0, 0.12, 73), 51.40, 1.0, 0.35)
+    place(buf, whispers(7.0, 0.10, 67), 57.20, 1.0, -0.25)
 
     # ---------------- risers
-    place(buf, riser(2.4, 0.55), 33.2, 1.0, 0.0)
-    place(buf, riser(2.0, 0.62), 57.4, 1.0, 0.0)
-    place(buf, reverse_swell(1.8, 0.55), 57.6, 1.0, 0.0)
+    place(buf, riser(2.4, 0.55), 30.40, 1.0, 0.0)
+    place(buf, riser(2.0, 0.62), 54.20, 1.0, 0.0)
+    place(buf, reverse_swell(1.8, 0.55), 55.00, 1.0, 0.0)
 
     # ---------------- the scare
-    place(buf, impact(1.0, 2.2), 59.40, 1.0, 0.0)
-    place(buf, glitch_sting(0.5), 59.42, 1.0, 0.0)
+    place(buf, impact(1.0, 2.2), 56.60, 1.0, 0.0)
+    place(buf, glitch_sting(0.5), 56.62, 1.0, 0.0)
 
     # ---------------- final hit
-    place(buf, impact(0.55, 2.0), 61.40, 1.0, 0.0)
+    place(buf, impact(0.55, 2.0), 64.30, 1.0, 0.0)
 
     # ---------------- master
     # gentle high-pass to remove DC / rumble
