@@ -1,0 +1,6 @@
+build/
+__pycache__/
+*.pyc
+
+# The rendered film is distributed as a GitHub Release asset (87 MB).
+out/*.mp4
