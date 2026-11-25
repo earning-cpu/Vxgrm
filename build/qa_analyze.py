@@ -4,10 +4,10 @@ Decodes EVERY frame and measures luma/contrast/clipping/text-band energy, detect
 cuts, freezes, black frames, and validates them against the shot manifest + timeline.
 Also audits the audio timeline (silence, VO presence per beat, loudness/peak).
 """
-import json, subprocess, numpy as np, imageio_ffmpeg, os, hashlib
+import json, subprocess, numpy as np, imageio_ffmpeg, os, hashlib, sys
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
-SRC = "out/bhangarh_shorts.mp4"
+SRC = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("-") else "out/bhangarh_shorts.mp4"
 GW, GH = 216, 384
 os.makedirs("work/qa", exist_ok=True)
 TL = json.load(open("work/timeline.json"))
@@ -218,6 +218,8 @@ rep = {
                     "max_band_luma": round(float(arr('sub_mean').max()), 1)},
   "hud_band": {"frames_with_text_pct": round(100*float((arr('hud_white') > 0.002).mean()), 1)},
 }
+os.makedirs("work/qa", exist_ok=True)
+rep["source"] = SRC
 json.dump(rep, open("work/qa/report.json","w"), indent=1, default=lambda o: float(o) if hasattr(o,"__float__") else str(o))
 json.dump(rows, open("work/qa/frames.json","w"), default=float)
 json.dump(det_cut_t, open("work/qa/cuts.json", "w"))

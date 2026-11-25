@@ -100,17 +100,35 @@ python3 -m venv .venv && .venv/bin/pip install imageio-ffmpeg pillow numpy fontt
 .venv/bin/python build/derive_bgs.py      # crop/mirror plates, ghost, doc + end cards
 .venv/bin/python build/audio_build.py     # VO prep (from assets/audio) -> timeline -> score -> -14 LUFS mix
 .venv/bin/python build/tune_assets.py     # per-plate exposure solve (cached in work/)
-.venv/bin/python build/video_build.py     # 30 shots -> concat -> overlay -> final mp4
-.venv/bin/python build/qa_analyze.py      # frame-by-frame + audio report -> work/qa/report.json
+.venv/bin/python build/video_build.py     # 30 shots -> concat -> overlay -> work/final_candidate.mp4
+.venv/bin/python build/apply.py           # QA gate: 11 hard checks, promotes only on PASS
+.venv/bin/python build/qa_analyze.py      # standalone frame-by-frame + audio report (optional)
 ```
+
+**The release gate.** `video_build.py` never writes the deliverable any more — it produces `work/final_candidate.mp4`, and `build/apply.py` copies it to `out/bhangarh_shorts.mp4` **only** if all 11 hard checks pass (black frames, frozen frames, dark % , healthy-luma %, clipping %, phantom cuts, cuts verified, unintended silence, duration, loudness, true peak). A failing build leaves the previous verified file untouched. The gate also refuses to run if the QA report belongs to a different file than the candidate.
 
 Notes:
 - `work/` is git-ignored (it holds ~800 MB of intermediates) and is fully regenerable. `audio_build.py` now preps the raw narration takes itself, so it is the only audio command you need.
-- `tune_assets.py` and `calibrate.py` are only needed after changing a plate, grade or target; their output is cached in `work/asset_tune.json`.
+- `tune_assets.py` is only needed after changing a plate, grade or target; its output is cached in `work/asset_tune.json`. There is **no** silent fallback: `build_chain()` aborts if a plate has no exposure solution.
+- The old `expo_gamma` + `calibrate.py` feedback loop was deleted. It was superseded by `tune_assets.py`, and because a stale/wiped calibration file made every shot render at a neutral gamma, it was the root cause of the 339-black-frame regression.
 - To re-run the QA on a delivered file **without** re-rendering, regenerate the two small bookkeeping files first:
   `.venv/bin/python build/audio_build.py && (cd build && ../.venv/bin/python make_manifest.py)` — the manifest is derived from the shot plan, never from the video.
 
-## 8. Post-delivery verification
+## 8. Bug fixes after delivery
+
+| # | Bug | Impact | Fix |
+|---|---|---|---|
+| 1 | Exposure calibration file wiped; 13 of 19 plates fell back to gamma 1.0 | 339 black frames, b05 at luma 10.6 | Re-solved all plates; `build_chain()` now **aborts** on an unsolved plate |
+| 2 | Dead `expo_gamma` feedback loop still imported and evaluated per shot | Silent regression path, confusing dead code | Deleted `calibrate.py` + `expo_gamma`; exposure is one deterministic path |
+| 3 | `hash()` used for SFX seeds | Every render produced a different mix (salted per process) | Stable per-beat seeds — audio build is now **bit-reproducible** (verified: 3 runs, identical MD5) |
+| 4 | Music bed summed twice then overwritten in the mix | Misleading code, risk of double-gain edits | Single clean mix pass; output verified unchanged in practice |
+| 5 | `03:07 AM · REC` stamp also drawn over the CTA/end card | Fake timestamp on the end card | Limited to the bazaar beat |
+| 6 | **Release gate ignored its own candidate argument** | A 20 s truncated file passed and overwrote a good deliverable | `qa_analyze.py` accepts a target; `apply.py` verifies the report's `source` matches before promoting. Re-tested: the same broken file is now **REJECTED on 4 checks** |
+| 7 | Pipeline assumed `work/` intermediates survive | Any sandbox restart broke the build | `audio_build.py` preps its own VO; `make_manifest.py` rebuilds bookkeeping; `derive_bgs.py` regenerates derived plates |
+
+Every fix above was verified by re-running the affected stage, not by inspection alone.
+
+## 9. Post-delivery verification
 
 The workspace was reset after delivery (only git-tracked files survive a sandbox restart, so `.venv/` and `work/` were gone and an untracked working copy was lost). The deliverable was restored from `origin/arena/49df9234-vxgrm` and re-verified end to end:
 

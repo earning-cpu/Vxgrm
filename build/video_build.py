@@ -3,8 +3,7 @@ import json, os, subprocess, sys
 import numpy as np
 from PIL import Image
 import imageio_ffmpeg
-from shotlib import (FF, W, H, FPS, TL, IMG, PLAN, SHOT_DIR, cam_expr,
-                     build_chain, expo_gamma, TARGET)
+from shotlib import (FF, W, H, FPS, TL, IMG, PLAN, SHOT_DIR, cam_expr, build_chain)
 
 ONLY = None
 if "--only" in sys.argv:
@@ -73,5 +72,5 @@ rgb[:, :, 3] = (alpha * 255).astype(np.uint8)
 Image.fromarray(rgb, "RGBA").save("work/grad.png")
 
 subprocess.run([".venv/bin/python", "build/ass_build.py"], check=True)
-subprocess.run([".venv/bin/python", "build/compose.py"], check=True)
-print("FINAL -> out/bhangarh_shorts.mp4")
+subprocess.run([".venv/bin/python", "build/compose.py", "--out", "work/final_candidate.mp4"], check=True)
+print("CANDIDATE -> work/final_candidate.mp4  (run build/apply.py to gate + promote)")

@@ -1,6 +1,6 @@
 {
- "file": "out/bhangarh_shorts.mp4",
- "bytes": 42006747,
+ "file": "work/final_candidate.mp4",
+ "bytes": 42004779,
  "duration": 60.44,
  "frames": 1813,
  "fps": 30,
@@ -51,7 +51,7 @@
  "audio": {
   "integrated_lufs": "-14.2",
   "lra": "4.2",
-  "true_peak_dbfs": "-5.8",
+  "true_peak_dbfs": "-7.1",
   "silence_runs": [],
   "vo_rms_per_beat": [
    {
@@ -547,5 +547,6 @@
  },
  "hud_band": {
   "frames_with_text_pct": 100.0
- }
+ },
+ "source": "work/final_candidate.mp4"
 }

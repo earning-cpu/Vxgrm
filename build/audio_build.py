@@ -204,10 +204,12 @@ def bell(f=880, dur=2.4):
     return s
 
 S = {s["id"]: s for s in timeline}
+# stable per-beat seeds (hash() is salted per process -> non-reproducible renders)
+SUM1 = {b: 100 + i for i, b in enumerate(BEATS)}
 # beats that get an impact + whoosh;  keep it rhythmic
 for b in ["b02", "b04", "b05", "b06", "b07", "b09", "b10"]:
     st = S[b]["start"]
-    place(sfx, whoosh(0.5, 320, 2900, seed=hash(b) % 999), st - 0.30, 0.34)
+    place(sfx, whoosh(0.5, 320, 2900, seed=SUM1[str(b)]), st - 0.30, 0.34)
     if b in ("b04", "b06", "b09", "b10"):
         place(sfx, boom(), st, 0.55)
         place(sfx, riser(1.25), st - 1.25, 0.30)
@@ -258,9 +260,8 @@ duck = 1.0 - 0.62 * vo_env            # music ducks under narration
 music = reverb(music, 3.0, 0.32, seed=2) * 0.42
 sfx = sfx * 0.85
 
-L = vo_track * 1.0 + music * duck * silen + sfx * silen
-R = vo_track * 1.0 + music * duck * silen + sfx * silen
-# tiny stereo width on music/sfx only
+# VO stays dead centre; music and SFX are decorrelated L/R for width.
+# (the earlier draft summed the bed twice, then overwrote it - one clean pass now)
 mL = reverb(music, 0.7, 0.3, seed=31) * duck * silen
 mR = reverb(music, 0.7, 0.3, seed=32) * duck * silen
 L = vo_track + mL * 0.42 + sfx * silen * 0.85

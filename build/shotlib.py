@@ -90,56 +90,10 @@ GRADE = {
           "colorbalance=rh=0.11:gh=0.03:bs=0.05",
 }
 
-TARGET = {"b01":44,"b02":52,"b03":50,"b04":54,"b05":40,"b06":40,
-          "b07":52,"b08":50,"b09":38,"b10":36}
-_src_luma = {}
-def src_luma(path):
-    """robust central-region luma (global mean lies about big black borders)"""
-    if path not in _src_luma:
-        from PIL import Image
-        import numpy as np
-        im = Image.open(path).convert("L")
-        w, h = im.size
-        c = im.crop((int(w*0.12), int(h*0.10), int(w*0.88), int(h*0.90)))
-        a = np.array(c).astype(np.float32)
-        _src_luma[path] = float(a.mean())
-    return _src_luma[path]
-
-def crop_luma(img_path, cam, n):
-    """luma of the region the virtual camera will actually show (start of shot)"""
-    from PIL import Image
-    import numpy as np
-    key = (img_path, cam)
-    if key in _src_luma: return _src_luma[key]
-    im = Image.open(img_path).convert("L")
-    W0, H0 = im.size
-    z = {"zin":1.03,"zout":1.30,"punch":1.40,"panL":1.24,"panR":1.24,
-         "tiltUp":1.24,"drift":1.14,"nin":1.50}.get(cam, 1.2)
-    cw, ch = W0/z, H0/z
-    if cam in ("panL","panR"):   cx, cy = (0.0 if cam=="panL" else 1.0), 0.5
-    elif cam == "tiltUp":        cx, cy = 0.5, 0.0
-    elif cam == "drift":         cx, cy = 0.30, 0.5
-    elif cam == "nin":           cx, cy = 0.52, 0.30
-    else:                        cx, cy = 0.5, 0.5
-    x0 = int((W0-cw)*cx); y0 = int((H0-ch)*cy)
-    a = np.array(im.crop((x0, y0, x0+int(cw), y0+int(ch)))).astype(np.float32)
-    _src_luma[key] = float(a.mean())
-    return _src_luma[key]
-
-def expo_gamma(img_path, beat, grade, cam, idx=None):
-    md = crop_luma(img_path, cam, 0)
-    mt = TARGET[beat]
-    # delivered luma is lowered by vignette + gradient overlay; compensate targets
-    mt *= 1.28
-    if "s05" in img_path: mt += 4
-    if "ghost" in img_path: mt += 6
-    if "bg_end" in img_path: mt += 2
-    if md <= 2: return 1.0
-    g = math.log(min(mt,235)/255.0) / math.log(max(md,1.0)/255.0)
-    g = min(max(g, 0.62), 1.25)
-    # data-driven correction learned from the previous QA pass
-    calib = EXPOSURE_CAL.get(str(idx), 1.0)
-    return round(min(max(g * calib, 0.30), 1.75), 3)
+# NOTE: exposure is solved per plate in build/tune_assets.py and applied by
+# build_chain() via tune_for(). The old feedback loop (expo_gamma + calibrate.py)
+# was removed: a wiped/stale calibration file silently rendered every shot at a
+# neutral gamma, which shipped a 339-black-frame cut.
 
 def cam_expr(cam, n):
     cx = "iw/2-(iw/zoom/2)"
@@ -157,10 +111,8 @@ def cam_expr(cam, n):
     return z, x, y
 
 
-EXPOSURE_CAL = json.load(open("work/expo_calib.json")) if os.path.exists("work/expo_calib.json") else {}
 
 
-FLAG_LIFT = ("s05", "bg_end", "s01_hook", "s09", "s08")
 SHOULDER = "curves=all='0/0.025 0.28/0.35 0.58/0.62 0.82/0.83 1/0.93'"
 ASSET_TUNE = json.load(open("work/asset_tune.json")) if os.path.exists("work/asset_tune.json") else {}
 
