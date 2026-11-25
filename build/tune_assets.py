@@ -29,7 +29,7 @@ def measure(png):
 
 def chain_for(path, gamma, grade, shoulder):
     c = ["scale=1620:2880:flags=lanczos,setsar=1",
-         "zoompan=z='1.12':d=1:s=%dx%d:fps=30" % (W, H),
+         "zoompan=z='1.12':d=1:s=%dx%d:fps=30" % (W // 2, H // 2),
          GRADE[grade], f"eq=gamma={gamma}"]
     if shoulder:
         c.append(SHOULDER)
@@ -44,6 +44,7 @@ PLATES = {
     "bg_doccard": "cold", "bg_end": "night",
     "s01_gate": "night", "s03_sadhu_up": "night", "s05_corridor": "night",
     "s04_shrine": "dusk", "s07_ruins": "cold",
+    "s06_curse": "night", "s10_bazaar": "night", "s11_victim": "night",
 }
 
 os.makedirs("work/tune", exist_ok=True)

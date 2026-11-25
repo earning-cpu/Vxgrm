@@ -28,11 +28,11 @@ The video separates the two on purpose: the notice is shown as **fact**, the two
 | b03 | 10.74–18.29 | "कहानी नंबर एक — गुरु बालू नाथ…" | Sage (2 angles) → shrine at dusk; title card **कहानी 1** |
 | b04 | 18.29–23.69 | "राजा ने महल और ऊँचा कर दिया…" | The wall's shadow over the shrine, 3 framings + inverted frame |
 | b05 | 23.69–31.13 | "कहानी नंबर दो — तांत्रिक सिंघिया और राजकुमारी रत्नावती…" | Princess + corridor; title card **कहानी 2** |
-| b06 | 31.13–35.05 | "मरते वक़्त सिंघिया ने कहा…" | Ghost-graded princess, corridor, stamped line **मौत का श्राप**; music drops to silence for 0.55 s |
+| b06 | 31.13–35.05 | "मरते वक़्त सिंघिया ने कहा…" | Robed sorcerer at the wall → ghost-graded princess; stamped line **मौत का श्राप**; music drops to silence for 0.55 s |
 | b07 | 35.05–44.27 | "असली इतिहास? 1783 तक…" | Roofless ruins; fact chip "1783 · पूरा शहर वीरान" |
 | b08 | 44.27–49.99 | "तो रात का बैन क्यों?…" | ASI notice card + 3D text, leopard eyes |
-| b09 | 49.99–54.24 | "लेकिन लोग आज भी कहते हैं…" | Slow creep on the princess, faked **03:07 AM · REC** stamp |
-| b10 | 54.24–60.44 | "अगर तुम्हें वहाँ रात में अकेला छोड़ दिया जाए…" | End card: **क्या करोगे?** + "कमेंट में बताओ" |
+| b09 | 49.99–54.24 | "लेकिन लोग आज भी कहते हैं…" | Empty bazaar with a swinging lantern (2 framings) + princess cameo; faked **03:07 AM · REC** stamp |
+| b10 | 54.24–60.44 | "अगर तुम्हें वहाँ रात में अकेला छोड़ दिया जाए…" | Lone man with a torch in the courtyard + leopard eyes; end card **क्या करोगे?** + "कमेंट में बताओ" |
 
 ## 3. Viral-edit grammar used
 
@@ -50,19 +50,21 @@ Method: every frame was decoded at 216×384, converted to luma, and measured for
 | Metric | Result | Verdict |
 |---|---|---|
 | Exposure: mean luma | 37.3 (p10 28.4 / p90 43.2) | Consistent, phone-safe |
-| Frames inside healthy luma band | **94.4 %** | ✅ |
+| Frames inside healthy luma band | **95.6 %** | ✅ |
 | Frames too dark (< 22) | **0.3 %** | ✅ |
 | Black frames / frozen frames | **0 / 0** | ✅ |
 | Flat, low-contrast frames | **0** | ✅ |
 | Peak-clipping frames | **0.0 %** | ✅ |
-| Cut detection | 28 detected / 27 matched of 29 real boundaries, **0 false positives** | ✅ |
+| Cut detection | 27 detected / 27 matched of 29 real boundaries, **0 false positives** | ✅ |
 | Cut sync error | ≤ 122 ms, average ~1 frame | ✅ |
 | Missing cuts | 1.63 s and 38.08 s — both are *same-plate continues* (segments of one shot), so no cut exists there. Correct behaviour. | ✅ |
 | Integrated loudness | **−14.2 LUFS**, LRA 4.2 LU | YouTube target ±1 |
-| True peak | −7.1 dBTP | No clipping |
+| True peak | −5.8 dBTP | No clipping |
 | Unintended silence | none (the only gap is the deliberate 0.55 s silence drop) | ✅ |
 | VO present in all 10 beats | −12.3 to −15.5 dBFS RMS each | ✅ |
 | Container | 1080×1920, **SAR 1:1**, DAR 9:16, bt709, 30 fps CFR, faststart | ✅ |
+
+A third defect was caught in the same pass: the **03:07 AM · REC** stamp ran into the end card; it is now limited to the bazaar beat.
 
 Two defects were found **only** by full-resolution inspection (not visible in contact sheets) and fixed:
 1. **Stray `{` glyph before every subtitle line** — a nested brace inside an ASS override block was being printed as text (शब्द-दर-शब्द ")} राजस्थान"). Emitter rewritten; verified clean on 1:1 crops.
@@ -86,7 +88,7 @@ Three earlier passes were rejected by this QA and re-cut:
 
 ## 6. What is original vs. generated
 
-- **Images:** AI-generated (8 plates) — no stock, no scraped photographs, nothing from the ASI or other channels. Five extra compositions are crops/mirrors of those plates.
+- **Images:** AI-generated (**11 plates**: fort, ruined town, sage, the shadow, princess, sorcerer, leopard, gate notice, bazaar, torch-lit victim) — no stock, no scraped photographs, nothing from the ASI or other channels. Eight extra compositions are crops/mirrors of those plates, kept to ≤3 appearances each.
 - **Voice:** two AI voices — masculine Hindi narration (perfume-free, factual read) and a feminine Hindi character voice reserved for the whisper direction.
 - **Music/SFX:** 100 % synthesized in `build/audio_build.py` (drone, pad, accelerating heartbeat, whooshes, booms, risers, bells, bazaar murmur, reverb) — no third-party music, so no Content ID risk.
 - **Fonts:** Noto Sans Devanagari (Black/Bold), Rozha One, Bebas Neue — all OFL.

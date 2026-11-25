@@ -38,6 +38,9 @@ IMG = {
     "s05_corridor": "work/s05_corridor.png",
     "s04_shrine":   "work/s04_shrine.png",
     "s07_ruins":    "work/s07_ruins.png",
+    "s06_curse":    "assets/img/s06_curse.png",
+    "s10_bazaar":   "assets/img/s10_bazaar.png",
+    "s11_victim":   "assets/img/s11_victim.png",
 }
 
 
@@ -68,12 +71,12 @@ PLAN = {
  "b08": [("s08_sign",      0.32, "zin",    "cold",  ["flash", "shake"]),
          ("bg_doccard",    0.36, "drift",  "cold",  ["pulse"]),
          ("s09_leopard",   0.32, "punch",  "night", ["invert"])],
- "b09": [("s05_princess",  0.33, "nin",    "night", ["ghost", "shake"]),
-         ("s05_corridor",  0.30, "panR",   "night", ["ghost", "glitch"]),
-         ("s01_hook",      0.37, "zin",    "night", ["pulse", "grain2"])],
+ "b09": [("s10_bazaar",    0.42, "zin",    "night", ["shake", "grain2"]),
+         ("s05_princess",  0.26, "nin",    "night", ["ghost"]),
+         ("s10_bazaar",    0.32, "panR",   "night", ["ghost", "glitch"])],
  "b10": [("bg_end",        0.30, "drift",  "night", ["flash"]),
-         ("s01_gate",      0.30, "zout",   "night", ["grain2"]),
-         ("s09_leopard",   0.40, "zin",    "night", ["shake", "pulse"])],
+         ("s11_victim",    0.32, "zout",   "night", ["grain2"]),
+         ("s09_leopard",   0.38, "zin",    "night", ["shake", "pulse"])],
 }
 
 GRADE = {
@@ -163,7 +166,11 @@ ASSET_TUNE = json.load(open("work/asset_tune.json")) if os.path.exists("work/ass
 
 def tune_for(img_path):
     stem = os.path.splitext(os.path.basename(img_path))[0]
-    return ASSET_TUNE.get(stem, {"gamma": 1.0, "shoulder": False})
+    if stem not in ASSET_TUNE:
+        # never silently fall back to a neutral gamma: that ships a dark/over-bright shot
+        raise SystemExit(f"no exposure solution for plate '{stem}'. "
+                         f"Run: cd build && ../.venv/bin/python tune_assets.py {stem}")
+    return ASSET_TUNE[stem]
 
 def build_chain(img_path, cam, grade, flags, beat, n, idx, for_sim=False):
     W_, H_ = W, H

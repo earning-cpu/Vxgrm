@@ -1,17 +1,17 @@
 {
  "file": "out/bhangarh_shorts.mp4",
- "bytes": 41455311,
+ "bytes": 42006747,
  "duration": 60.44,
  "frames": 1813,
  "fps": 30,
  "resolution": "1080x1920",
  "sar": "1:1",
  "video": {
-  "luma_mean": 37.3,
-  "luma_p10": 28.4,
+  "luma_mean": 37.4,
+  "luma_p10": 28.5,
   "luma_p90": 43.2,
-  "contrast_mean": 92.5,
-  "pct_frames_in_healthy_range": 94.4,
+  "contrast_mean": 93.9,
+  "pct_frames_in_healthy_range": 95.6,
   "pct_frames_too_dark": 0.3,
   "pct_frames_near_clip": 0.0,
   "black_frames": 0,
@@ -20,22 +20,22 @@
   "edge_diff_median": 0.15,
   "edge_cut_threshold": 2.2,
   "edge_diff_top": [
-   6.71,
    6.88,
    6.89,
-   7.15,
    7.21,
    7.33,
+   7.39,
+   7.43,
    7.67,
    7.69,
-   7.92,
+   7.91,
    7.95,
-   8.06,
+   8.05,
    9.22,
-   13.55,
+   13.56,
    13.75
   ],
-  "cuts_detected": 28,
+  "cuts_detected": 27,
   "cuts_expected": 30,
   "cuts_matched": 27,
   "cut_sync_max_ms": 122,
@@ -43,17 +43,15 @@
    1.633,
    38.078
   ],
-  "extra_cuts": [
-   51.9
-  ],
+  "extra_cuts": [],
   "avg_shot_len": 2.02,
-  "min_shot_len": 1.17,
+  "min_shot_len": 1.1,
   "max_shot_len": 3.33
  },
  "audio": {
   "integrated_lufs": "-14.2",
   "lra": "4.2",
-  "true_peak_dbfs": "-7.1",
+  "true_peak_dbfs": "-5.8",
   "silence_runs": [],
   "vo_rms_per_beat": [
    {
@@ -207,10 +205,10 @@
     49.99
    ],
    "frames": 172,
-   "luma_mean": 54.400001525878906,
+   "luma_mean": 54.099998474121094,
    "luma_min": 29.899999618530273,
    "luma_max": 193.5,
-   "contrast_mean": 160.3,
+   "contrast_mean": 159.2,
    "shots": 3
   },
   {
@@ -220,10 +218,10 @@
     54.236
    ],
    "frames": 128,
-   "luma_mean": 32.400001525878906,
-   "luma_min": 22.600000381469727,
-   "luma_max": 36.900001525878906,
-   "contrast_mean": 67.6,
+   "luma_mean": 34.0,
+   "luma_min": 30.399999618530273,
+   "luma_max": 35.400001525878906,
+   "contrast_mean": 81.3,
    "shots": 3
   },
   {
@@ -233,10 +231,10 @@
     60.438
    ],
    "frames": 186,
-   "luma_mean": 33.29999923706055,
-   "luma_min": 26.399999618530273,
+   "luma_mean": 33.900001525878906,
+   "luma_min": 26.200000762939453,
    "luma_max": 194.10000610351562,
-   "contrast_mean": 68.4,
+   "contrast_mean": 73.7,
    "shots": 3
   }
  ],
@@ -269,7 +267,7 @@
    "grade": "cold",
    "dur": 2.467,
    "luma": 30.9,
-   "contrast": 74.3
+   "contrast": 74.2
   },
   {
    "beat": "b02",
@@ -289,7 +287,7 @@
    "grade": "cold",
    "dur": 1.667,
    "luma": 30.7,
-   "contrast": 75.1
+   "contrast": 75.2
   },
   {
    "beat": "b02",
@@ -299,7 +297,7 @@
    "grade": "night",
    "dur": 1.867,
    "luma": 27.9,
-   "contrast": 55.3
+   "contrast": 55.2
   },
   {
    "beat": "b03",
@@ -419,7 +417,7 @@
    "grade": "cold",
    "dur": 1.4,
    "luma": 38.1,
-   "contrast": 106.6
+   "contrast": 106.5
   },
   {
    "beat": "b07",
@@ -478,38 +476,38 @@
    "cam": "punch",
    "grade": "night",
    "dur": 1.833,
-   "luma": 48.5,
-   "contrast": 120.0
+   "luma": 47.4,
+   "contrast": 116.7
   },
   {
    "beat": "b09",
    "t": 49.99,
+   "img": "s10_bazaar",
+   "cam": "zin",
+   "grade": "night",
+   "dur": 1.8,
+   "luma": 33.2,
+   "contrast": 85.4
+  },
+  {
+   "beat": "b09",
+   "t": 51.79,
    "img": "s05_princess",
    "cam": "nin",
    "grade": "night",
-   "dur": 1.4,
-   "luma": 35.2,
-   "contrast": 69.8
+   "dur": 1.1,
+   "luma": 35.1,
+   "contrast": 70.0
   },
   {
    "beat": "b09",
-   "t": 51.39,
-   "img": "s05_corridor",
+   "t": 52.89,
+   "img": "s10_bazaar",
    "cam": "panR",
    "grade": "night",
-   "dur": 1.267,
-   "luma": 36.4,
-   "contrast": 77.4
-  },
-  {
-   "beat": "b09",
-   "t": 52.657,
-   "img": "s01_hook",
-   "cam": "zin",
-   "grade": "night",
-   "dur": 1.567,
-   "luma": 26.8,
-   "contrast": 58.0
+   "dur": 1.367,
+   "luma": 34.2,
+   "contrast": 84.9
   },
   {
    "beat": "b10",
@@ -518,32 +516,32 @@
    "cam": "drift",
    "grade": "night",
    "dur": 1.867,
-   "luma": 36.7,
-   "contrast": 53.6
+   "luma": 37.0,
+   "contrast": 54.9
   },
   {
    "beat": "b10",
    "t": 56.103,
-   "img": "s01_gate",
+   "img": "s11_victim",
    "cam": "zout",
    "grade": "night",
-   "dur": 1.867,
-   "luma": 32.1,
-   "contrast": 69.9
+   "dur": 2.0,
+   "luma": 35.2,
+   "contrast": 88.6
   },
   {
    "beat": "b10",
-   "t": 57.969,
+   "t": 58.103,
    "img": "s09_leopard",
    "cam": "zin",
    "grade": "night",
-   "dur": 2.467,
-   "luma": 31.6,
-   "contrast": 78.4
+   "dur": 2.367,
+   "luma": 30.2,
+   "contrast": 75.9
   }
  ],
  "subtitle_band": {
-  "frames_with_white_text_pct": 76.1,
+  "frames_with_white_text_pct": 75.6,
   "min_band_luma": 16.5,
   "max_band_luma": 231.1
  },

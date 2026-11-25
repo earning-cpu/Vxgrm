@@ -192,8 +192,8 @@ add(b6["start"] + 0.55, b6["start"] + 3.0, "title",
 b9 = BEATS["b09"]
 
 # found-footage REC stamp
-for _b in ("b09", "b10"):
-    _s0 = BEATS[_b]["start"] + (0.3 if _b == "b09" else 0.6)
+for _b in ("b09",):
+    _s0 = BEATS[_b]["start"] + 0.3
     _s1 = BEATS[_b]["end"] - 0.05
     add(_s0, _s1, "hud2", "{\\an7\\pos(58,1738)\\c&H00D0D0D0&\\alpha&H20&\\fad(120,120)}03:07 AM · REC", 4)
     add(_s0, _s1, "tag", "{\\an7\\pos(58,1730)\\p1\\bord0\\shad0\\1c" + RED +
