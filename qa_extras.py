@@ -56,16 +56,16 @@ def per_shot(video, shots):
 
 def srt(shots, path="out/kaka_mala_vachwa.srt"):
     lines = [
-        "पुणे का ये किला... आज भी एक आवाज़ सुनता है।",
-        "साल 1773। शनिवारवाड़ा — मराठा साम्राज्य का दिल।\nऔर इसका मालिक... अठारह साल का नारायणराव पेशवा।",
-        "उसके चाचा रघुनाथराव ने एक आदेश भेजा —\nनारायणराव को पकड़ो।",
-        "लेकिन रास्ते में... किसी ने एक शब्द बदल दिया।\nपकड़ो की जगह... मारो।",
+        "ये चीख़... दो सौ पचास साल से रुकी नहीं है।",
+        "साल 1773। पुणे का शनिवारवाड़ा।\nऔर उसका मालिक... सिर्फ़ अठारह साल का नारायणराव पेशवा।",
+        "उसके चाचा रघुनाथराव ने एक आदेश भेजा — नारायणराव को पकड़ो।",
+        "लेकिन रास्ते में किसी ने एक शब्द बदल दिया।\nपकड़ो की जगह... मारो।",
         "गणेश चतुर्थी की रात, हत्यारे किले में घुस गए।",
-        "नारायणराव भागा... अपने ही महल के गलियारों में।\nऔर फिर वो चीख़... जो आज तक नहीं रुकी।",
+        "नारायणराव भागा... अपने ही महल के गलियारों में।\nऔर फिर वो चीख़...",
         "काका... मला वाचवा।",
-        "कोई नहीं आया। उसका शरीर टुकड़ों में... एक मटके में...\nनदी में बहा दिया गया। अंतिम संस्कार कभी नहीं हुआ।",
-        "साल 1828। पूरा महल सात दिन तक जला। सिर्फ़ दीवारें बचीं।",
+        "कोई नहीं आया। उसका शरीर टुकड़ों में... एक मटके में...\nनदी में बहा दिया गया। अंतिम संस्कार कभी नहीं हुआ।\nसाल 1828। पूरा महल सात दिन तक जला। सिर्फ़ दीवारें बचीं।",
         "और आज... हर पूर्णिमा की रात...\nलोग आज भी वो आवाज़ सुनते हैं।\nअगर तुम सुनो... तो जवाब मत देना।",
+        "और अगर तुम्हें ये कहानियाँ असली जगहों पर सुननी हैं...\nतो सब्सक्राइब कर लो। मैं तुम्हें वहीं ले चलूँगा...\nजहाँ से ये आवाज़ आती है।",
     ]
     keys = ["v01", "v02", "v03", "v04", "v05", "v06", "v07", "v08", "v09", "v10"]
 
@@ -76,38 +76,43 @@ def srt(shots, path="out/kaka_mala_vachwa.srt"):
     out = []
     for i, k in enumerate(keys):
         t0 = TL.VO_START[k]
-        t1 = t0 + TL.VO[k]
+        t1 = min(t0 + TL.VO[k], TL.VIDEO_END)
         out.append(f"{i+1}\n{ts(t0)} --> {ts(t1)}\n{lines[i]}\n")
     open(path, "w", encoding="utf-8").write("\n".join(out))
     return path
 
 
 def thumbnail(path="out/thumbnail.jpg"):
-    """1280x720 YouTube thumbnail built from the doorway plate + title type."""
+    """1280x720 YouTube thumbnail, set in the film's paper cut-out type."""
     from src import design as D
-    from src import renderer as R
+    from src import paper as P
     W, H = 1280, 720
-    img = D.cover(D.load("assets/img/sb1_p10_doorway.jpg"), W, H, 1.02, 0.5, 0.45)
-    img = D.color_grade(img, gain=(1.03, 1.0, 1.0), saturation=1.08, contrast=1.10)
-    img = np.clip(img, 0, 1) ** 0.90
-    img *= D.vignette_mask(W, H, 0.55, 2.0)[..., None]
-    # left dark scrim for type
+    img = D.cover(D.load("assets/img/paper_test_hook.png"), W, H, 1.06, 0.52, 0.42)
+    img = np.clip(img, 0, 1)
+    # darken the left half so torn-paper labels read cleanly
     xs = np.linspace(0, 1, W, dtype=np.float32)[None, :, None]
-    img *= (1 - 0.80 * np.clip(1 - xs / 0.72, 0, 1) ** 1.3)
+    img *= (1 - 0.72 * np.clip(1 - xs / 0.78, 0, 1) ** 1.25)
+    img *= D.vignette_mask(W, H, 0.50, 2.0)[..., None]
 
-    # badge
-    D.fill_rr(img, (54, 60, 300, 116), 8, (176, 20, 26), 0.95)
-    D.stroke_rr(img, (54, 60, 300, 116), 8, (240, 110, 110), 2, 0.9)
-    D.draw_text(img, "असली घटना", "dev_b", 38, (255, 255, 255), 66, 88, "lm", stroke=3)
+    def label(box, color, seed=0):
+        x0, y0, x1, y1 = box
+        P.panel(img, x0, y0, x1, y1, color, seed=seed, alpha=0.97, rough=0.10)
 
-    # title
-    D.draw_text(img, "काका...", "serif_b", 104, (240, 234, 224), 56, 250, "lt", stroke=6)
-    D.draw_text(img, "मला वाचवा", "serif_b", 118, (236, 34, 40), 56, 372, "lt", stroke=9)
-    D.draw_text(img, "250 साल पुरानी चीख़", "dev_b", 40, (214, 208, 198), 58, 520, "lt",
-                stroke=4)
-    D.draw_text(img, "शनिवारवाड़ा · 1773", "dev", 32, (170, 166, 158), 58, 578, "lt", stroke=3)
+    label((44, 40, 300, 100), P.OXIDE, 3)
+    D.draw_text(img, "असली घटना", "dev_b", 36, P.BONE, 62, 70, "lm")
+
+    # two-line title on one torn parchment sheet
+    label((44, 118, 570, 350), P.PARCHMENT, 4)
+    D.draw_text(img, "काका...", "serif_b", 96, P.INK, 74, 168, "lm")
+    D.draw_text(img, "मला वाचवा", "serif_b", 96, P.INK, 74, 286, "lm")
+
+    label((44, 372, 700, 452), P.CHARCOAL, 5)
+    D.draw_text(img, "250 साल पुरानी चीख़", "dev_b", 46, P.BONE, 74, 412, "lm")
+
+    D.draw_text(img, "शनिवारवाड़ा · 1773", "dev", 30, (196, 190, 180), 74, 490, "lt",
+                stroke=3)
     img = D.grain(img, 0.02, 7)
-    Image.fromarray(D.to_uint8(img)).save(path, quality=94)
+    Image.fromarray(D.to_uint8(np.clip(img, 0, 1))).save(path, quality=94)
     return path
 
 

@@ -125,31 +125,6 @@ def _rich_segments(cue):
     return segs
 
 
-def _draw_pill(img, cue, t, alpha, scale, dy):
-    """Red subscribe pill behind the CTA text. Returns horizontal text offset."""
-    from .text_engine import text_width
-    # text_layer renders at 1.3x then _place scales back, so ink is text_width*1.3*scale
-    tw = text_width(cue.text, "dev_b", cue.size, cue.tracking) * 1.30 * scale
-    pulse = 1.0 + 0.030 * np.sin((t - cue.t0) * 8.0)
-    w = tw + cue.size * 2.45 * scale * pulse
-    h = cue.size * 1.78 * scale * pulse
-    cx, cy = cue.x * W, cue.y * H + dy
-    x0, y0, x1, y1 = cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2
-    D.fill_rr(img, (x0 + 5, y0 + 12, x1 + 5, y1 + 12), h * 0.34, (0, 0, 0), 0.5 * alpha)
-    D.fill_rr(img, (x0, y0, x1, y1), h * 0.34, (190, 20, 26), 0.97 * alpha)
-    D.stroke_rr(img, (x0, y0, x1, y1), h * 0.34, (255, 132, 132), 2.2, 0.7 * alpha)
-    # bell glyph
-    bx, by = x0 + h * 0.52, cy - h * 0.02
-    r = h * 0.125
-    D.fill_rr(img, (bx - r, by - r * 1.1, bx + r, by + r * 0.5), r, (255, 255, 255), alpha)
-    D.fill_rr(img, (bx - r * 0.40, by + r * 0.5, bx + r * 0.40, by + r * 0.88), r * 0.2,
-              (255, 255, 255), alpha)
-    D.fill_rr(img, (bx - r * 0.50, by - r * 1.50, bx + r * 0.50, by - r * 1.02), r * 0.3,
-              (255, 255, 255), alpha)
-    text_cx = x0 + h * 1.18 + tw / 2
-    return text_cx - cx
-
-
 def _place(img, rgba, x, y, scale=1.0, alpha=1.0):
     if scale <= 0.001 or alpha <= 0.002:
         return

@@ -118,8 +118,8 @@ def build():
                   vignette=0.55, cues=[
                       Cue(0.06, 3.95, "250 साल", size=150, y=0.190, paper="oxide",
                           anim="punch", seed=3),
-                      Cue(0.38, 3.95, "पुरानी चीख़", size=100, y=0.835,
-                          paper="charcoal", anim="slide", seed=4),
+                      Cue(0.38, 3.95, "पुरानी चीख़", size=74, x=0.275, y=0.905,
+                          paper="charcoal", anim="slide", seed=4, max_w=600),
                       Cue(0.55, 3.95, "असली घटना", size=40, y=0.125, x=0.29,
                           paper="oxide", anim="slide", seed=11),
                   ]))
@@ -174,8 +174,8 @@ def build():
     # ============================================ ACT 7 : THE CRY (32.85 - 35.10)
     S.append(Shot(32.85, 35.10, HOOK, z0=1.34, z1=1.06, cy=0.44, trans="flash",
                   flash=0.65, shake=7.0, cues=[
-                      Cue(32.95, 35.10, "काका... मला वाचवा", size=100, y=0.815,
-                          paper="oxide", anim="punch", shake=4.0, seed=19),
+                      Cue(32.95, 35.10, "काका... मला वाचवा", size=86, y=0.930,
+                          paper="oxide", anim="punch", shake=2.0, seed=19),
                   ]))
 
     # ============================================ ACT 8 : AFTERMATH (35.10 - 44.90)
@@ -206,9 +206,11 @@ def build():
                   trans="dip", cues=[
                       Cue(48.60, 56.60, "हर पूर्णिमा की रात", size=84, y=0.255,
                           paper="parchment", anim="pop", seed=25),
-                      Cue(50.60, 56.60, "आज भी वो आवाज़ सुनते हैं", size=70,
+                      Cue(50.60, 53.55, "आज भी वो आवाज़ सुनते हैं", size=70,
                           y=0.600, paper="charcoal", anim="slide", seed=26),
-                      Cue(53.60, 56.60, "जवाब मत देना", size=100, y=0.430,
+                      # the punchline takes over the lower third instead of
+                      # stacking a third label over the archway
+                      Cue(53.60, 56.60, "जवाब मत देना", size=100, y=0.760,
                           paper="oxide", anim="punch", shake=3.0, seed=27),
                   ]))
 
@@ -216,7 +218,13 @@ def build():
     # no CTA card: the subscribe ask is spoken by the narration
     S.append(Shot(56.60, 66.20, "p11_doorway.png", z0=1.02, z1=1.16, cy=0.50,
                   trans="dip", darken=0.08, vignette=0.85, cues=[
-                      Cue(64.30, 66.20, "काका मला वाचवा", size=78, y=0.500,
-                          paper="oxide", anim="pop", seed=28),
+                      # these follow the narration; the subscribe ask itself is
+                      # spoken only, never set on screen
+                      Cue(56.90, 59.40, "असली जगहों पर", size=68, y=0.235,
+                          paper="charcoal", anim="pop", seed=28),
+                      Cue(61.95, 64.15, "जहाँ से ये आवाज़ आती है", size=66,
+                          y=0.235, paper="charcoal", anim="slide", seed=29),
+                      Cue(64.30, 66.20, "काका मला वाचवा", size=84, y=0.868,
+                          paper="charcoal", anim="pop", seed=30),
                   ]))
     return S

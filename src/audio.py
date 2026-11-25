@@ -1,5 +1,9 @@
 """Procedural score + sound design + voiceover assembly for the short."""
 import os
+import re
+import time
+import struct
+import wave
 import subprocess
 import numpy as np
 from scipy import signal as sg
@@ -268,19 +272,95 @@ def place(buf, sig, t, gain=1.0, pan=0.0):
     buf[s:e] += sig[:e - s] * gain
 
 
+_VO_CACHE = {}
+_TMP = "/tmp/_vo_work"
+_DISK = "build/vo"
+
+
+def _wav_samples(path):
+    """Sample count of a 16-bit mono WAV, read from its data chunk."""
+    try:
+        with open(path, "rb") as f:
+            d = f.read()
+    except OSError:
+        return 0
+    i = d.find(b"data")
+    if i < 0:
+        return 0
+    size = struct.unpack("<I", d[i + 4:i + 8])[0]
+    return size // 2
+
+
+def _to_wav(exe, src, dst, chain=None):
+    """Decode to a WAV on disk.
+
+    Decoding through a pipe proved unreliable in this sandbox (intermittent
+    truncation), so every decode goes via a file and is measured from its
+    data chunk before it is trusted.
+    """
+    cmd = [exe, "-v", "error", "-y", "-i", src]
+    if chain:
+        cmd += ["-filter:a", chain]
+    cmd += ["-ar", str(SR), "-ac", "1", dst]
+    subprocess.run(cmd, capture_output=True)
+    return dst
+
+
+def _read_wav(path):
+    with wave.open(path, "rb") as w:
+        n = w.getnframes()
+        raw = w.readframes(n)
+    return np.frombuffer(raw, dtype="<i2").astype(np.float64) / 32768.0
+
+
 def load_vo(name, tempo=1.18):
+    """Decode one narration line, verified against its true length.
+
+    The decode is retried until the WAV it produces is as long as the source
+    actually is, then cached to disk so it is never re-rolled.
+    """
+    key = (name, round(float(tempo), 4))
+    if key in _VO_CACHE:
+        return _VO_CACHE[key]
+
+    os.makedirs(_DISK, exist_ok=True)
+    npy = os.path.join(_DISK, f"{name}_{round(float(tempo), 3)}.npy")
+    if os.path.exists(npy):
+        a = np.load(npy)
+        _VO_CACHE[key] = a
+        return a
+
     exe = imageio_ffmpeg.get_ffmpeg_exe()
-    p = os.path.join("assets/vo", name + ".mp3")
-    r = subprocess.run([exe, "-v", "error", "-i", p, "-filter:a",
-                        f"atempo={tempo},highpass=f=70,acompressor=threshold=-18dB:ratio=3",
-                        "-f", "f32le", "-ac", "1", "-ar", str(SR), "-"],
-                       capture_output=True)
-    a = np.frombuffer(r.stdout, dtype=np.float32).astype(np.float64)
-    # trim leading/trailing silence
+    src = os.path.join("assets/vo", name + ".mp3")
+    os.makedirs(_TMP, exist_ok=True)
+
+    # Ground truth from the container: these are CBR 32 kbps mono mp3s, so
+    # filesize gives the real length. ffmpeg's own duration report and its
+    # mp3 demuxer are both unreliable in this sandbox, so neither is trusted.
+    size = os.path.getsize(src)
+    want = size * 8 / 32000.0 * SR / max(tempo, 1e-3)
+
+    chain = f"atempo={tempo},highpass=f=70,acompressor=threshold=-18dB:ratio=3"
+    out = os.path.join(_TMP, f"{name}.wav")
+    n = 0
+    for _ in range(12):
+        _to_wav(exe, src, out, chain)
+        n = _wav_samples(out)
+        if n >= 0.95 * want:
+            break
+        time.sleep(0.03)
+    if n < 0.90 * want:
+        raise RuntimeError(
+            f"VO '{name}' decoded {n/SR:.2f}s, expected {want/SR:.2f}s")
+
+    a = _read_wav(out)
     th = 0.006
     idx = np.where(np.abs(a) > th)[0]
     if len(idx):
         a = a[max(0, idx[0] - int(0.03 * SR)): idx[-1] + int(0.08 * SR)]
+
+    np.save(npy, a)
+    _VO_CACHE[key] = a
     return a
 
 
@@ -405,6 +485,15 @@ def build_audio(shots, out_wav, vo_start=None, tempo=1.18, stems=False):
     # ---------------- final hit
     place(buf, impact(0.55, 2.0), 64.30, 1.0, 0.0)
 
+    # ---------------- room tone
+    # a low-level air bed under the whole film: no frame may ever be dead,
+    # even where the score decays inside a narration pause.
+    n = N
+    x = noise(n, 4242)
+    x = lowpass(x, 320, 2)
+    x = x / (np.max(np.abs(x)) + 1e-9) * 0.020
+    buf += x[:, None] * np.array([1.0, 0.94], dtype=np.float64)[None, :]
+
     # ---------------- master
     # gentle high-pass to remove DC / rumble
     for c in range(2):
@@ -433,7 +522,7 @@ def build_audio(shots, out_wav, vo_start=None, tempo=1.18, stems=False):
 
     peak = np.max(np.abs(buf))
     if peak > 0:
-        buf = buf / peak * 0.95
+        buf = buf / peak * 0.88
 
     if stems:
         import wave as _w
