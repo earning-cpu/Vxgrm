@@ -14,12 +14,12 @@
 | Mean luminance | 0.162 | 0.05–0.35 | ✅ |
 | Luminance p05 / p95 | 0.037 / 0.264 | dynamic range | ✅ |
 | Contrast (σ) mean | 0.142 | > 0.10 | ✅ |
-| Highlight clipping (max) | 0.023% | < 3% | ✅ |
-| Shadow crush (max) | 12.273% | < 25% | ✅ |
+| Highlight clipping (max) | 0.022% | < 3% | ✅ |
+| Shadow crush (max) | 12.296% | < 25% | ✅ |
 | Sharpness (Laplacian σ², normalised) | 0.0004–0.0386 | > 0.005 | ✅ |
 | Audio RMS mean | 0.2111 | > 0.05 | ✅ |
 | Silent audio frames | 0 | 0 | ✅ |
-| A/V sync lag | 0 frames (r=0.318) | 0 ± 2 | ✅ |
+| A/V sync lag | 0 frames (r=0.32) | 0 ± 2 | ✅ |
 | Cuts detected | 20/23 | all | ✅ |
 
 ## 2. Frame-level defect scan
@@ -56,7 +56,7 @@ Every other cut lands exactly on its declared frame — zero drift across the fu
 | 7 | 16.30–19.20 | p3_letter | 87 | 0.256 | 0.187 | 0.0102 | 0 | 0 | OK |
 | 8 | 19.20–21.60 | TEXT CARD | 72 | 0.034 | 0.041 | 0.0083 | 0 | 0 | OK |
 | 9 | 21.60–24.60 | p4_assassins | 90 | 0.165 | 0.129 | 0.0134 | 0 | 0 | OK |
-| 10 | 24.60–27.60 | p4_assassins | 90 | 0.169 | 0.141 | 0.0337 | 0 | 0 | OK |
+| 10 | 24.60–27.60 | p4_assassins | 90 | 0.169 | 0.141 | 0.0336 | 0 | 0 | OK |
 | 11 | 27.60–31.10 | p5_running | 105 | 0.229 | 0.221 | 0.0730 | 0 | 0 | OK |
 | 12 | 31.10–34.30 | p5_running | 96 | 0.238 | 0.233 | 0.0770 | 0 | 0 | OK |
 | 13 | 34.30–35.60 | p2_corridor | 39 | 0.046 | 0.041 | 0.0180 | 0 | 0 | OK |
@@ -65,17 +65,17 @@ Every other cut lands exactly on its declared frame — zero drift across the fu
 | 16 | 42.40–45.00 | p6_courtyard | 78 | 0.303 | 0.188 | 0.0129 | 0 | 0 | OK |
 | 17 | 45.00–46.70 | p9_river | 51 | 0.215 | 0.182 | 0.0131 | 0 | 0 | OK |
 | 18 | 46.70–49.80 | p7_fire | 93 | 0.185 | 0.177 | 0.0300 | 0 | 0 | OK |
-| 19 | 49.80–53.20 | p8_ruins | 102 | 0.181 | 0.142 | 0.0097 | 0 | 0 | OK |
+| 19 | 49.80–53.20 | p8_ruins | 102 | 0.181 | 0.142 | 0.0096 | 0 | 0 | OK |
 | 20 | 53.20–56.60 | p8_ruins | 102 | 0.203 | 0.182 | 0.0095 | 0 | 0 | OK |
 | 21 | 56.60–59.40 | p10_doorway | 84 | 0.072 | 0.103 | 0.0101 | 0 | 0 | OK |
 | 22 | 59.40–61.40 | p10_doorway | 60 | 0.111 | 0.158 | 0.0463 | 0 | 0 | OK |
-| 23 | 61.40–64.30 | TEXT CARD | 87 | 0.045 | 0.083 | 0.0062 | 0 | 0 | OK |
+| 23 | 61.40–64.30 | TEXT CARD | 87 | 0.045 | 0.083 | 0.0060 | 0 | 0 | OK |
 
 ## 5. Audio integrity
 
 - RMS mean: 0.2111
 - Frames below −56 dBFS: 0
-- A/V onset correlation: 0.318 at lag 0 frames
+- A/V onset correlation: 0.32 at lag 0 frames
 
 ---
 
