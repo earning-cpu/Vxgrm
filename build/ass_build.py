@@ -9,8 +9,13 @@ TL = json.load(open("work/timeline.json"))
 TOTAL = TL["total"]
 BEATS = {b["id"]: b for b in TL["beats"]}
 
-CHANNEL = "HORROR HINDI"          # <- change to your channel handle
-TAGLINE = "हिंदी स्टोरीज़"
+# Branding lives in assets/brand.json so a handle change never needs a code edit.
+BRAND = json.load(open("assets/brand.json", encoding="utf-8"))
+CHANNEL = BRAND.get("channel", "HORROR HINDI")
+TAGLINE = BRAND.get("tagline", "हिंदी स्टोरीज़")
+SHOW_HANDLE = BRAND.get("show_handle", True)
+SERIES = BRAND.get("series", "BHANGARH FORT")
+SERIES_HI = BRAND.get("series_hi", "अलवर · राजस्थान")
 
 DEV   = "Noto Sans Devanagari Black"
 DEV_S = "Noto Sans Devanagari"     # Bold face
@@ -115,10 +120,11 @@ for bid, b in BEATS.items():
         wi += len(ch)
 
 # ------------------------------------------------------------------ HUD
-add(0, TOTAL, "hud", f"{{\\an7\\pos(58,92)}}BHANGARH FORT", 3)
-add(0, TOTAL, "hud2", f"{{\\an7\\pos(60,152)}}अलवर · राजस्थान", 3)
-add(0, TOTAL, "hud", f"{{\\an9\\pos(1022,92)}}{CHANNEL}", 3)
-add(0, TOTAL, "hud2", f"{{\\an9\\pos(1020,152)}}{TAGLINE}", 3)
+add(0, TOTAL, "hud", f"{{\\an7\\pos(58,92)}}{SERIES}", 3)
+add(0, TOTAL, "hud2", f"{{\\an7\\pos(60,152)}}{SERIES_HI}", 3)
+if SHOW_HANDLE:
+    add(0, TOTAL, "hud", f"{{\\an9\\pos(1022,92)}}{CHANNEL}", 3)
+    add(0, TOTAL, "hud2", f"{{\\an9\\pos(1020,152)}}{TAGLINE}", 3)
 
 # red accent bar next to the title block
 add(0, TOTAL, "tag", "{\\an7\\pos(40,80)\\p1\\bord0\\shad0\\1c" + RED + "\\fscx100\\fscy100}"
