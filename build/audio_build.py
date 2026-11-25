@@ -32,6 +32,23 @@ def load_wav(path):
 
 BEATS = ["b01","b02","b03","b04","b05","b06","b07","b08","b09","b10"]
 
+# ---------------------------------------------------------------- VO prep (idempotent)
+# Trim leading/trailing silence, de-noise and gently compress the raw TTS takes.
+if not os.path.exists("work/vo/vo_b01.wav"):
+    os.makedirs("work/vo", exist_ok=True)
+    af = ("silenceremove=start_periods=1:start_duration=0:start_threshold=-45dB:detection=peak,"
+          "areverse,silenceremove=start_periods=1:start_duration=0:start_threshold=-45dB:detection=peak,areverse,"
+          "highpass=f=85,lowpass=f=15000,acompressor=threshold=-18dB:ratio=3:attack=8:release=180:makeup=2,"
+          "loudnorm=I=-16:TP=-1.5:LRA=9")
+    for b in BEATS:
+        src = f"assets/audio/vo_{b}.mp3"
+        if not os.path.exists(src):
+            raise SystemExit(f"missing narration take: {src}")
+        subprocess.run([FF, "-y", "-hide_banner", "-loglevel", "error", "-i", src,
+                        "-af", af, "-ar", "48000", "-ac", "1", f"work/vo/vo_{b}.wav"], check=True)
+    print("VO prepped from assets/audio")
+
+
 vo = {}
 for b in BEATS:
     src = f"work/vo/vo_{b}.wav"

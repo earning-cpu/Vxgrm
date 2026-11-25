@@ -1,6 +1,7 @@
 # Upload kit — भानगढ़ किला (Shorts)
 
-**File:** bhangarh_shorts.mp4 · 60.44 s · 1080×1920 · 39.5 MB · −14.2 LUFS
+**File:** bhangarh_shorts.mp4 · 60.44 s · 1080×1920 (9:16) · 30 fps · 39.5 MB · −14.2 LUFS
+**Verified:** full frame-by-frame QA re-run after restore — see `qa_report.json`
 
 ## Title
 भानगढ़ किला 😨 जहाँ सूरज ढलने के बाद जाना बैन है | Bhangarh Fort Real Story Hindi

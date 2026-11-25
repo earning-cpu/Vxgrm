@@ -96,10 +96,26 @@ Three earlier passes were rejected by this QA and re-cut:
 ```bash
 python3 -m venv .venv && .venv/bin/pip install imageio-ffmpeg pillow numpy fonttools
 .venv/bin/python build/derive_bgs.py      # crop/mirror plates, ghost, doc + end cards
-.venv/bin/python build/audio_build.py     # VO prep, timeline, music, SFX -> -14 LUFS mix
+.venv/bin/python build/audio_build.py     # VO prep (from assets/audio) -> timeline -> score -> -14 LUFS mix
 .venv/bin/python build/tune_assets.py     # per-plate exposure solve (cached in work/)
 .venv/bin/python build/video_build.py     # 30 shots -> concat -> overlay -> final mp4
 .venv/bin/python build/qa_analyze.py      # frame-by-frame + audio report -> work/qa/report.json
 ```
 
-`tune_assets.py` and `calibrate.py` are only needed after changing a plate, grade or target; their output is cached in `work/asset_tune.json`.
+Notes:
+- `work/` is git-ignored (it holds ~800 MB of intermediates) and is fully regenerable. `audio_build.py` now preps the raw narration takes itself, so it is the only audio command you need.
+- `tune_assets.py` and `calibrate.py` are only needed after changing a plate, grade or target; their output is cached in `work/asset_tune.json`.
+- To re-run the QA on a delivered file **without** re-rendering, regenerate the two small bookkeeping files first:
+  `.venv/bin/python build/audio_build.py && (cd build && ../.venv/bin/python make_manifest.py)` — the manifest is derived from the shot plan, never from the video.
+
+## 8. Post-delivery verification
+
+The workspace was reset after delivery (only git-tracked files survive a sandbox restart, so `.venv/` and `work/` were gone and an untracked working copy was lost). The deliverable was restored from `origin/arena/49df9234-vxgrm` and re-verified end to end:
+
+- `out/bhangarh_shorts.mp4` present and byte-complete: 60.44 s, 1 813 frames, 1080×1920 SAR 1:1, 30 fps, 39.5 MB, 5.5 Mb/s + AAC 164 kb/s.
+- Full frame-by-frame QA re-run from scratch: **39 measured fields compared against the archived `out/qa_report.json` — 0 material differences.**
+- Invariants reconfirmed: 94.4 % frames in band, 0 black / 0 frozen / 0 flat frames, 27/29 cuts matched with 0 false positives, −14.2 LUFS, −7.1 dBTP, no unintended silence.
+- Timeline reproduced to the millisecond (60.438 s) from `assets/audio/*.mp3`, and the shot manifest rebuilt deterministically (30 shots, 60.501 s).
+- Spot-checked frames at 0:02, 0:32, 0:47 and 0:59 — headline, curse stamp, notice card and end card all render correctly.
+
+Pipeline hardening from that incident: `audio_build.py` is now self-sufficient (VO prep included) and `build/make_manifest.py` reconstructs the shot manifest from the plan, so QA no longer depends on intermediates that the `.gitignore` drops.
