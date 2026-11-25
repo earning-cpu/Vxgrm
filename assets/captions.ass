@@ -1,0 +1,33 @@
+[Script Info]
+Title: Kuldhara Hindi Horror Short — burned-in captions
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+
+[V4+ Styles]
+Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
+Style: Caption,Noto Sans Devanagari,56,&H00D8F2FF,&H000000FF,&HBA0A0F15,&H8C05080E,-1,0,0,0,100,100,0,0,1,4,2,2,72,72,255,1
+Style: Hook,Noto Sans Devanagari,88,&H0035D9FF,&H000000FF,&HE0000000,&H90000000,-1,0,0,0,100,100,0,0,1,6,3,8,55,55,320,1
+Style: Tag,Noto Sans Devanagari,40,&H00D8F2FF,&H000000FF,&HBA0A0F15,&H8C05080E,-1,0,0,0,100,100,0,0,3,6,2,8,70,70,230,1
+Style: CTA,Noto Sans Devanagari,42,&H00D8F2FF,&H000000FF,&HBA0A0F15,&H8C05080E,-1,0,0,0,100,100,0,0,1,4,2,2,72,72,465,1
+
+[Events]
+Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
+Dialogue: 0,0:00:00.20,0:00:05.50,Tag,,0,0,0,,कुलधरा की लोककथा
+Dialogue: 0,0:00:00.20,0:00:05.50,Hook,,0,0,0,,एक रात में…\Nपूरा गाँव खाली?
+Dialogue: 1,0:00:00.28,0:00:03.10,Caption,,0,0,0,,एक रात में पूरा गाँव खाली…
+Dialogue: 1,0:00:03.10,0:00:05.60,Caption,,0,0,0,,और जाते-जाते श्राप भी!
+Dialogue: 1,0:00:05.60,0:00:09.51,Caption,,0,0,0,,सुनने में फिल्मी लगता है,\Nपर कुलधरा असली जगह है।
+Dialogue: 1,0:00:09.51,0:00:13.98,Caption,,0,0,0,,जैसलमेर के पास बसा ये\Nपालीवाल गाँव आज वीरान है।
+Dialogue: 1,0:00:13.98,0:00:18.08,Caption,,0,0,0,,राजस्थान पर्यटन पर दर्ज\Nलोककथा कहती है—
+Dialogue: 1,0:00:18.08,0:00:22.63,Caption,,0,0,0,,1825 में दीवान सलीम सिंह ने\Nमुखिया की बेटी से शादी की ज़िद की।
+Dialogue: 1,0:00:23.34,0:00:26.82,Caption,,0,0,0,,कहानी के मुताबिक, उसी रात…\Nलोग घर छोड़कर चले गए…
+Dialogue: 1,0:00:26.82,0:00:31.29,Caption,,0,0,0,,और श्राप दिया: यहाँ\Nकोई फिर नहीं बसेगा।
+Dialogue: 1,0:00:31.29,0:00:33.28,Caption,,0,0,0,,सुबह हुई—गलियाँ बचीं…\Nलोग नहीं।
+Dialogue: 1,0:00:33.28,0:00:37.10,Caption,,0,0,0,,गाँव का उजड़ना इतिहास है।
+Dialogue: 1,0:00:37.10,0:00:42.90,Caption,,0,0,0,,श्राप और भूत—लोककथा हैं।\Nपलायन की असली वजह अब तक पक्की नहीं।
+Dialogue: 1,0:00:42.90,0:00:46.35,Caption,,0,0,0,,अब बताओ… उस खाली दरवाज़े पर\Nदस्तक किसने दी?
+Dialogue: 1,0:00:42.95,0:00:46.30,CTA,,0,0,0,,कमेंट में अपना जवाब लिखो
