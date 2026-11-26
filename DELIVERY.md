@@ -128,7 +128,24 @@ Notes:
 
 Every fix above was verified by re-running the affected stage, not by inspection alone.
 
-## 9. Post-delivery verification
+## 9. Branding
+
+On-screen branding is data, not code — `assets/brand.json`:
+
+```json
+{ "channel": "...", "tagline": "...", "series": "BHANGARH FORT",
+  "series_hi": "अलवर · राजस्थान", "show_handle": false }
+```
+
+Per the channel owner's choice the top-right handle and its tagline are **hidden**; only the series label (`BHANGARH FORT` / `अलवर · राजस्थान`) is shown. To put a handle back, set `"show_handle": true`, fill in `channel` + `tagline`, then re-compose (overlay only, ~4 min, no shot re-render):
+
+```bash
+.venv/bin/python build/ass_build.py
+.venv/bin/python build/compose.py --out work/final_candidate.mp4
+.venv/bin/python build/apply.py work/final_candidate.mp4
+```
+
+## 10. Post-delivery verification
 
 The workspace was reset after delivery (only git-tracked files survive a sandbox restart, so `.venv/` and `work/` were gone and an untracked working copy was lost). The deliverable was restored from `origin/arena/49df9234-vxgrm` and re-verified end to end:
 
